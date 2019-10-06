@@ -7,7 +7,7 @@
 <ion-content padding>
   <ion-list>
     <ion-item *ngFor="let user of users">
-        <ion-avatar>
+        <ion-avatar slot="start">
           <img [src]="user.avatar_url"/>
         </ion-avatar>
         <ion-label text-wrap>

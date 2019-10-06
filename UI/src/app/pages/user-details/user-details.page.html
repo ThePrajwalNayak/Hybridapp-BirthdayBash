@@ -5,8 +5,8 @@
 </ion-header>
 
 <ion-content padding>
-     
-  <ion-card >
+
+  <ion-card>
     <ion-card-header>
       <ion-card-title>
         {{ user.login }}
@@ -19,28 +19,27 @@
     <ion-card-content text-center>
       <img [src]="user.avatar_url" class="info-img">
       {{ user.avatar_url }}
- 
-      <ion-item lines="none">
-        <ion-icon name="star-half" slot="start"></ion-icon>
-        <ion-label>{{followersArray.length}}</ion-label>
-      </ion-item>
- 
-      <ion-item lines="none">
-        <ion-icon name="clipboard" slot="start"></ion-icon>
-        <ion-label text-wrap>{{followingArray.length}}</ion-label>
-      </ion-item>
- 
-      <ion-item lines="none">
-        <ion-icon name="contacts" slot="start"></ion-icon>
-        <ion-label text-wrap>JP Nagar, Bangalore</ion-label>
+
+      <ion-item>
+        <ion-label text-wrap>
+          Followers
+          <ion-badge color="primary">{{followersArray.length}}</ion-badge>
+        </ion-label>
+        <ion-button (click)="openModal(FOLLOWERS)">Open</ion-button>
       </ion-item>
 
-      <ion-button (click)="openModal(FOLLOWERS)">Open Following</ion-button>     
-      <ion-button (click)="openModal(FOLLOWING)">Open Followers</ion-button>        
+      <ion-item>
+        <ion-label text-wrap>
+          Following
+          <ion-badge color="primary">{{followingArray.length}}</ion-badge>
+        </ion-label>
+        <ion-button (click)="openModal(FOLLOWING)">Open</ion-button>
+      </ion-item>
+
     </ion-card-content>
   </ion-card>
 
-    <ion-button expand="block" routerLink="/user" routerDirection="forward">
-      User
-    </ion-button>
+  <ion-button expand="block" routerLink="/user" routerDirection="forward">
+    Back
+  </ion-button>
 </ion-content>

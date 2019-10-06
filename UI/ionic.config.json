@@ -1,5 +1,7 @@
 {
   "name": "BirthdayBash",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

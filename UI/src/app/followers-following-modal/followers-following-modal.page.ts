@@ -8,17 +8,17 @@ import { ModalController, NavParams } from '@ionic/angular';
 })
 export class FollowersFollowingModalPage implements OnInit {
 
-  users: any;
+  user : any;
+  users : any;
   modalType : string;
-  
+
   constructor(private modalController: ModalController,
     private navParams: NavParams) { }
 
   ngOnInit() {
-    console.table(this.navParams);
+    this.user = this.navParams.data.user;
     this.users = this.navParams.data.users;
     this.modalType = this.navParams.data.modalType;
-    debugger;
   }
 
   async closeModal() {

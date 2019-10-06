@@ -4,7 +4,8 @@ import { mergeMap } from 'rxjs/operators';
 
 
 export enum FollowersFollowingModalType {
-  FOLLOWERS, FOLLOWING
+  FOLLOWERS = 'Followers',
+  FOLLOWING = 'Following'
 }
 
 @Injectable({
