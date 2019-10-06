@@ -2,6 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { mergeMap } from 'rxjs/operators';
 
+
+export enum FollowersFollowingModalType {
+  FOLLOWERS, FOLLOWING
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,11 +31,15 @@ export class UserService {
   }
 
   getFollower(username) {
-    return this.httpClient.get('https://api.github.com/users' + username + '/followers');
+    return this.httpClient.get('https://api.github.com/users/' + username + '/followers');
   }
 
   getFollowing(username) {
-    return this.httpClient.get('https://api.github.com/users' + username + '/following');
+    return this.httpClient.get('https://api.github.com/users/' + username + '/following');
+  }
+
+  getRepoDetails(username) {
+    return this.httpClient.get('https://api.github.com/users/' + username + '/repos');
   }
 
 }

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { ModalController } from '@ionic/angular';
+import { UserService, FollowersFollowingModalType } from '../../services/user.service';
+import { FollowersFollowingModalPage } from '../../followers-following-modal/followers-following-modal.page';
+import { FollowersFollowingModalPageModule } from 'src/app/followers-following-modal/followers-following-modal.module';
 
 @Component({
   selector: 'app-user-details',
@@ -7,12 +10,68 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./user-details.page.scss'],
 })
 export class UserDetailsPage implements OnInit {
-  user : any;
-  constructor(private userService : UserService) { 
+  user: any;
+  FOLLOWERS: FollowersFollowingModalType = FollowersFollowingModalType.FOLLOWERS;
+  FOLLOWING: FollowersFollowingModalType = FollowersFollowingModalType.FOLLOWING;
+  followersArray: any = [];
+  followingArray: any = [];
+
+
+  constructor(private userService: UserService, public modalController: ModalController) {
   }
 
   ngOnInit() {
     this.user = this.userService.getSelectedUser();
+    this.getFollower();
+    this.getFollowing();
+  }
+
+
+  getFollower() {
+    this.userService.getFollower(this.user.login)
+      .subscribe(data => {
+        this.followersArray = data;
+      }, error => {
+        console.log(error);
+      });
+  }
+
+  getFollowing() {
+    this.userService.getFollowing(this.user.login)
+      .subscribe(data => {
+        this.followingArray = data;
+      }, error => {
+        console.log(error);
+      })
+  }
+
+
+
+  async openModal(modalType: FollowersFollowingModalType) {
+    var input = {
+      'users': null,
+      'modalType': null
+    };
+    if (modalType === this.FOLLOWERS) {
+      input.users = this.followersArray;
+      input.modalType = this.FOLLOWERS;
+    } else {
+      input.users = this.followingArray;
+      input.modalType = this.FOLLOWING;
+    }
+    const modal = await this.modalController.create({
+      component: FollowersFollowingModalPage,
+      componentProps: input
+    });
+
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+        let dataReturnedModal = dataReturned.data;
+        //alert('Modal Sent Data :'+ dataReturned);
+      }
+    });
+
+    return await modal.present();
   }
 
 }
