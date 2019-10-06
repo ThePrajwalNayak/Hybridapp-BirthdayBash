@@ -10,6 +10,7 @@ import { FollowersFollowingModalPage } from '../../followers-following-modal/fol
 })
 export class UserDetailsPage implements OnInit {
   user: any;
+  repos : any = [];
   FOLLOWERS: FollowersFollowingModalType = FollowersFollowingModalType.FOLLOWERS;
   FOLLOWING: FollowersFollowingModalType = FollowersFollowingModalType.FOLLOWING;
   followersArray: any = [];
@@ -21,10 +22,19 @@ export class UserDetailsPage implements OnInit {
 
   ngOnInit() {
     this.user = this.userService.getSelectedUser();
+    this.getRepoDetails();
     this.getFollower();
     this.getFollowing();
   }
 
+  getRepoDetails(){
+    this.userService.getRepoDetails(this.user.login)
+    .subscribe(data => {
+      this.repos = data;
+    }, error => {
+      console.log(error);
+    });
+  }
 
   getFollower() {
     this.userService.getFollower(this.user.login)
