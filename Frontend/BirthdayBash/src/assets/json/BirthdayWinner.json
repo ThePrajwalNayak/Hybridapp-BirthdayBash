@@ -1,0 +1,26 @@
+{
+    "boy" : {
+        "birthdayId" : 1,
+        "name" : "Rohit Kumar",
+        "mobile" : "91088723456",
+        "photo" : null,
+        "place" : "MG Road, Banaglore",
+        "note" : "Count your life by smiles, not tears. Count your age by friends, not years. Happy birthday!",
+        "date" : null,
+        "sex" : "Male",
+        "sponsor" : "Flipkart",
+        "gift" : "50% off on laptop"
+    },
+    "girl" : {
+        "birthdayId" : 2,
+        "name" : "Anusha Nag",
+        "mobile" : "7760023849",
+        "photo" : null,
+        "place" : "Brigade Metropolis, Mumbai",
+        "note" : "Another adventure filled year awaits you. Welcome it by celebrating your birthday with pomp and splendor.",
+        "date" : null,
+        "sex" : "Female",
+        "sponsor" : "Baskin Robbins",
+        "gift" : "FREE Ice cream"
+    }
+}
