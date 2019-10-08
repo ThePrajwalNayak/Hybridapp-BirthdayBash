@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>Hackers</ion-title>\n    <ion-button expand=\"block\" routerLink=\"/home\" routerDirection=\"forward\">\n      Home\n    </ion-button>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item *ngFor=\"let user of users\">\n        <ion-avatar slot=\"start\">\n          <img [src]=\"user.avatar_url\"/>\n        </ion-avatar>\n        <ion-label text-wrap>\n            <h3>{{ user.login }}</h3>\n          </ion-label>\n          <ion-button expand=\"block\" (click)=\"goToUserDetails(user)\" routerDirection=\"forward\">\n            Details\n          </ion-button>\n    </ion-item>\n  </ion-list>\n\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"loadData($event)\">\n      <ion-infinite-scroll-content\n        loadingSpinner=\"bubbles\"\n        loadingText=\"Loading more user...\">\n      </ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n      <ion-title>Hackers</ion-title> \n      <ion-button slot=\"start\" color=\"dark\" routerLink=\"/home\" routerDirection=\"forward\"> <ion-icon name=\"arrow-back\"></ion-icon>Back</ion-button>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item *ngFor=\"let user of users\">\n        <ion-avatar slot=\"start\">\n          <img [src]=\"user.avatar_url\"/>\n        </ion-avatar>\n        <ion-label text-wrap>\n            <h3>{{ user.login }}</h3>\n          </ion-label>\n          <ion-icon name=\"arrow-forward\" size=\"large\" (click)=\"goToUserDetails(user)\"></ion-icon>\n    </ion-item>\n  </ion-list>\n\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"loadData($event)\">\n      <ion-infinite-scroll-content\n        loadingSpinner=\"bubbles\"\n        loadingText=\"Loading more hackers...\">\n      </ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n    <ion-fab class=\"light\" vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\">\n        <ion-fab-button (click)=\"pageScroller()\">\n          <ion-icon name=\"arrow-dropup-circle\"></ion-icon>\n        </ion-fab-button>\n      </ion-fab>\n    <!-- <ion-button (click)=\"pageScroller()\"> Top</ion-button> -->\n</ion-content>\n"
 
 /***/ }),
 
@@ -90,6 +90,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 let UserPage = class UserPage {
     constructor(userService, router) {
         this.userService = userService;
@@ -124,6 +125,13 @@ let UserPage = class UserPage {
         this.userService.setSelectedUser(user);
         this.router.navigate(['/userDetails']);
     }
+    goToHomePage() {
+        this.router.navigate(['/home']);
+    }
+    pageScroller() {
+        //scroll to page top
+        this.content.scrollToTop();
+    }
 };
 UserPage.ctorParameters = () => [
     { type: _services_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"] },
@@ -133,6 +141,10 @@ tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["IonInfiniteScroll"], { static: false }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["IonInfiniteScroll"])
 ], UserPage.prototype, "infiniteScroll", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["IonContent"], { static: false }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["IonContent"])
+], UserPage.prototype, "content", void 0);
 UserPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-user',

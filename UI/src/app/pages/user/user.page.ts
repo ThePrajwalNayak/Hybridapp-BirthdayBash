@@ -41,9 +41,9 @@ export class UserPage implements OnInit {
 
         // App logic to determine if all data is loaded
         // and disable the infinite scroll
-        if (this.users.length > 90) {
-          event.target.disabled = true;
-        }
+        // if (this.users.length > 90) {
+        //   event.target.disabled = true;
+        // }
       });
     }, 1000);
   }
@@ -57,8 +57,7 @@ export class UserPage implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  public pageScroller(){
-    //scroll to page top
+  backToTop(){
     this.content.scrollToTop();
   }
 

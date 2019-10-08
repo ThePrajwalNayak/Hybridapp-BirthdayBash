@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
       <ion-title>Hackers</ion-title> 
-      <ion-button slot="start" color="dark" routerLink="/home" routerDirection="forward"> <ion-icon name="arrow-back"></ion-icon>Back</ion-button>
+      <ion-button slot="start" color="primary" routerLink="/home" routerDirection="forward"> <ion-icon name="arrow-back"></ion-icon>Back</ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -25,9 +25,8 @@
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
     <ion-fab class="light" vertical="bottom" horizontal="start" slot="fixed">
-        <ion-fab-button (click)="pageScroller()">
+        <ion-fab-button (click)="backToTop()">
           <ion-icon name="arrow-dropup-circle"></ion-icon>
         </ion-fab-button>
       </ion-fab>
-    <!-- <ion-button (click)="pageScroller()"> Top</ion-button> -->
 </ion-content>
