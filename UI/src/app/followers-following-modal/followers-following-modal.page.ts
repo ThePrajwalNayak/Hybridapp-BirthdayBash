@@ -12,7 +12,7 @@ export class FollowersFollowingModalPage implements OnInit {
   user : any;
   users : any;
   modalType : string;
-  @ViewChild(IonContent, { static: false }) content: IonContent;
+  @ViewChild(IonContent, { static: true }) content: IonContent;
 
   constructor(private modalController: ModalController,
     private navParams: NavParams) { }

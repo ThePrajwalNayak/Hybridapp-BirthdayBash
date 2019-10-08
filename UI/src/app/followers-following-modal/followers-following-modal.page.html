@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar>
-      <ion-title class="titleCase">{{user.login}} {{modalType | titlecase}}</ion-title>
+      <ion-title class="titleCase" text-center>{{user.login}} {{modalType | titlecase}}</ion-title>
       <ion-icon slot="end" name="close" size="large" (click)="closeModal()"></ion-icon>
     </ion-toolbar>
   </ion-header>
@@ -11,11 +11,13 @@
           <ion-avatar slot="start">
             <img [src]="u.avatar_url"/>
           </ion-avatar>
-          <ion-label text-wrap>
+          <ion-label text-center>
               <h3>{{ u.login }}</h3>
             </ion-label>
       </ion-item>
     </ion-list>
-    <ion-button (click)="backToTop()">Back To Top</ion-button>
+    <ion-button (click)="backToTop()">
+        <ion-icon name="arrow-dropup-circle"></ion-icon>
+    </ion-button>
   </ion-content>
   

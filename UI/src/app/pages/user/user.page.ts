@@ -14,7 +14,7 @@ export class UserPage implements OnInit {
   nextUserIndex = 0;
   users: any;
   @ViewChild(IonInfiniteScroll, { static: false }) infiniteScroll: IonInfiniteScroll;
-  @ViewChild(IonContent, { static: false }) content: IonContent;
+  @ViewChild(IonContent, { static: true }) content: IonContent;
   
 
   constructor(private userService: UserService, private router : Router) { }
