@@ -814,6 +814,9 @@ let UserService = class UserService {
         console.log(nextUserIndex);
         return this.httpClient.get('https://api.github.com/users?since=' + nextUserIndex);
     }
+    getUserByUserName(username) {
+        return this.httpClient.get('https://api.github.com/users/' + username);
+    }
     getFollower(username) {
         return this.httpClient.get('https://api.github.com/users/' + username + '/followers');
     }

@@ -474,7 +474,7 @@ module.exports = "<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-ap
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n    <ion-toolbar>\n      <ion-title class=\"titleCase\">{{user.login}} {{modalType | titlecase}}</ion-title>\n    </ion-toolbar>\n  </ion-header>\n  \n  <ion-content padding>\n    <ion-list>\n      <ion-item *ngFor=\"let u of users\">\n          <ion-avatar slot=\"start\">\n            <img [src]=\"u.avatar_url\"/>\n          </ion-avatar>\n          <ion-label text-wrap>\n              <h3>{{ u.login }}</h3>\n            </ion-label>\n      </ion-item>\n      <ion-button (click)=\"closeModal()\">Close Modal</ion-button>\n    </ion-list>\n  </ion-content>\n  "
+module.exports = "<ion-header>\n    <ion-toolbar>\n      <ion-title class=\"titleCase\">{{user.login}} {{modalType | titlecase}}</ion-title>\n      \n    </ion-toolbar>\n  </ion-header>\n  \n  <ion-content padding>\n    <ion-list>\n      <ion-item *ngFor=\"let u of users\">\n          <ion-avatar slot=\"start\">\n            <img [src]=\"u.avatar_url\"/>\n          </ion-avatar>\n          <ion-label text-wrap>\n              <h3>{{ u.login }}</h3>\n            </ion-label>\n      </ion-item>\n    </ion-list>\n    <ion-button (click)=\"closeModal()\">Close Modal</ion-button>\n  </ion-content>\n  "
 
 /***/ }),
 
@@ -495,8 +495,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const routes = [
-    { path: '', redirectTo: 'user', pathMatch: 'full' },
-    { path: 'home', loadChildren: () => __webpack_require__.e(/*! import() | home-home-module */ "home-home-module").then(__webpack_require__.bind(null, /*! ./home/home.module */ "./src/app/home/home.module.ts")).then(m => m.HomePageModule) },
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: 'home', loadChildren: () => Promise.all(/*! import() | home-home-module */[__webpack_require__.e("common"), __webpack_require__.e("home-home-module")]).then(__webpack_require__.bind(null, /*! ./home/home.module */ "./src/app/home/home.module.ts")).then(m => m.HomePageModule) },
     { path: 'user', loadChildren: './pages/user/user.module#UserPageModule' },
     { path: 'userDetails', loadChildren: './pages/user-details/user-details.module#UserDetailsPageModule' }
 ];

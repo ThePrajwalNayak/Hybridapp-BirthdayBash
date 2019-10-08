@@ -560,6 +560,9 @@ var UserService = /** @class */ (function () {
         console.log(nextUserIndex);
         return this.httpClient.get('https://api.github.com/users?since=' + nextUserIndex);
     };
+    UserService.prototype.getUserByUserName = function (username) {
+        return this.httpClient.get('https://api.github.com/users/' + username);
+    };
     UserService.prototype.getFollower = function (username) {
         return this.httpClient.get('https://api.github.com/users/' + username + '/followers');
     };

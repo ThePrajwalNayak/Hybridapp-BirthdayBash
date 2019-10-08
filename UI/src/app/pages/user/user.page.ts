@@ -50,4 +50,8 @@ export class UserPage implements OnInit {
     this.router.navigate(['/userDetails']);
   }
 
+  goToHomePage(){
+    this.router.navigate(['/home']);
+  }
+
 }

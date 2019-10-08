@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>\n      Ionic Blank\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"ion-padding\">\n    The world is your oyster.\n    <p>If you get lost, the <a target=\"_blank\" rel=\"noopener\" href=\"https://ionicframework.com/docs/\">docs</a> will be your guide.</p>\n  </div>\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>\n      Hackers Hero\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n\n  <ion-card>\n    <ion-card-header>\n      <ion-card-title>\n        {{ hackersHero.login }}\n      </ion-card-title>\n      <ion-card-subtitle>\n        Hacker since 1957\n        <!-- {{ information.Year }} -->\n      </ion-card-subtitle>\n    </ion-card-header>\n    <ion-card-content text-center>\n      <img [src]=\"hackersHero.avatar_url\" class=\"info-img\">\n      <ion-button expand=\"block\" routerLink=\"/user\" routerDirection=\"forward\">\n        More Hackers\n      </ion-button>\n    </ion-card-content>\n  </ion-card>\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -84,18 +84,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomePage", function() { return HomePage; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/user.service */ "./src/app/services/user.service.ts");
+
 
 
 var HomePage = /** @class */ (function () {
-    function HomePage() {
+    function HomePage(userService) {
+        this.userService = userService;
+        this.username = 'ThePrajwalNayak';
+        this.hackersHero = [];
     }
+    HomePage.prototype.ngOnInit = function () {
+        this.getHackersHero();
+    };
+    HomePage.prototype.getHackersHero = function () {
+        var _this = this;
+        this.userService.getUserByUserName(this.username)
+            .subscribe(function (data) {
+            _this.hackersHero = data;
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    HomePage.ctorParameters = function () { return [
+        { type: _services_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"] }
+    ]; };
     HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-home',
             template: __webpack_require__(/*! raw-loader!./home.page.html */ "./node_modules/raw-loader/index.js!./src/app/home/home.page.html"),
             styles: [__webpack_require__(/*! ./home.page.scss */ "./src/app/home/home.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"]])
     ], HomePage);
     return HomePage;
 }());

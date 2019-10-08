@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>userDetails</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n     \n  <ion-card >\n    <ion-card-header>\n      <ion-card-title>\n        {{ user.login }}\n      </ion-card-title>\n      <ion-card-subtitle>\n        Hacker since 1957\n        <!-- {{ information.Year }} -->\n      </ion-card-subtitle>\n    </ion-card-header>\n    <ion-card-content text-center>\n      <img [src]=\"user.avatar_url\" class=\"info-img\">\n      {{ user.avatar_url }}\n \n      <ion-item lines=\"none\">\n        <ion-icon name=\"star-half\" slot=\"start\"></ion-icon>\n        <ion-label>{{followersArray.length}}</ion-label>\n      </ion-item>\n \n      <ion-item lines=\"none\">\n        <ion-icon name=\"clipboard\" slot=\"start\"></ion-icon>\n        <ion-label text-wrap>{{followingArray.length}}</ion-label>\n      </ion-item>\n \n      <ion-item lines=\"none\">\n        <ion-icon name=\"contacts\" slot=\"start\"></ion-icon>\n        <ion-label text-wrap>JP Nagar, Bangalore</ion-label>\n      </ion-item>\n\n      <ion-button (click)=\"openModal(FOLLOWERS)\">Open Following</ion-button>     \n      <ion-button (click)=\"openModal(FOLLOWING)\">Open Followers</ion-button>        \n    </ion-card-content>\n  </ion-card>\n\n    <ion-button expand=\"block\" routerLink=\"/user\" routerDirection=\"forward\">\n      User\n    </ion-button>\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>userDetails</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n\n  <ion-card>\n    <ion-card-header>\n      <ion-card-title>\n        {{ user.login }}\n      </ion-card-title>\n      <ion-card-subtitle>\n        Hacker since 1957\n        <!-- {{ information.Year }} -->\n      </ion-card-subtitle>\n    </ion-card-header>\n    <ion-card-content text-center>\n      <img [src]=\"user.avatar_url\" class=\"info-img\">\n      {{ user.avatar_url }}\n\n      <ion-item>\n        <ion-label text-wrap>\n          Followers\n          <ion-badge color=\"primary\">{{followersArray.length}}</ion-badge>\n        </ion-label>\n        <ion-button (click)=\"openModal(FOLLOWERS)\">Open</ion-button>\n      </ion-item>\n\n      <ion-item>\n        <ion-label text-wrap>\n          Following\n          <ion-badge color=\"primary\">{{followingArray.length}}</ion-badge>\n        </ion-label>\n        <ion-button (click)=\"openModal(FOLLOWING)\">Open</ion-button>\n      </ion-item>\n\n    </ion-card-content>\n  </ion-card>\n\n  <ion-button expand=\"block\" routerLink=\"/user\" routerDirection=\"forward\">\n    Back\n  </ion-button>\n</ion-content>\n"
 
 /***/ }),
 
@@ -94,6 +94,7 @@ let UserDetailsPage = class UserDetailsPage {
     constructor(userService, modalController) {
         this.userService = userService;
         this.modalController = modalController;
+        this.repos = [];
         this.FOLLOWERS = _services_user_service__WEBPACK_IMPORTED_MODULE_3__["FollowersFollowingModalType"].FOLLOWERS;
         this.FOLLOWING = _services_user_service__WEBPACK_IMPORTED_MODULE_3__["FollowersFollowingModalType"].FOLLOWING;
         this.followersArray = [];
@@ -101,8 +102,17 @@ let UserDetailsPage = class UserDetailsPage {
     }
     ngOnInit() {
         this.user = this.userService.getSelectedUser();
+        this.getRepoDetails();
         this.getFollower();
         this.getFollowing();
+    }
+    getRepoDetails() {
+        this.userService.getRepoDetails(this.user.login)
+            .subscribe(data => {
+            this.repos = data;
+        }, error => {
+            console.log(error);
+        });
     }
     getFollower() {
         this.userService.getFollower(this.user.login)
