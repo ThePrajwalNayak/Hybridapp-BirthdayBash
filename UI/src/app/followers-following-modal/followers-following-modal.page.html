@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar>
       <ion-title class="titleCase">{{user.login}} {{modalType | titlecase}}</ion-title>
-      
+      <ion-icon name="close" size="large" (click)="closeModal()"></ion-icon>
     </ion-toolbar>
   </ion-header>
   
@@ -16,6 +16,6 @@
             </ion-label>
       </ion-item>
     </ion-list>
-    <ion-button (click)="closeModal()">Close Modal</ion-button>
+    <ion-button (click)="closeModal()">Back To Top</ion-button>
   </ion-content>
   

@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Hacker Detail</ion-title>
-    <ion-button color="dark" routerLink="/user" routerDirection="forward"> <ion-icon name="arrow-back"></ion-icon>Back</ion-button>
+    <ion-button color="dark" routerLink="/user" routerDirection="forward">
+      <ion-icon name="arrow-back"></ion-icon>Back
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -14,7 +16,6 @@
       </ion-card-title>
       <ion-card-subtitle>
         Hacker since 1957
-        <!-- {{ information.Year }} -->
       </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content text-center>
@@ -22,25 +23,26 @@
       {{ user.avatar_url }}
 
       <ion-item>
-        <ion-label text-wrap>
-          Followers
-          <ion-badge color="primary">{{followersArray.length}}</ion-badge>
-        </ion-label>
-        <ion-button (click)="openModal(FOLLOWERS)">Open</ion-button>
+        <ion-chip>
+          <ion-label class="ion-margin-end">
+            Followers
+          </ion-label>
+          <ion-badge color="dark">{{followersArray.length}}</ion-badge>
+        </ion-chip>
+        <ion-button class="ion-float-right" (click)="openModal(FOLLOWERS)">Show</ion-button>
       </ion-item>
 
       <ion-item>
-        <ion-label text-wrap>
-          Following
-          <ion-badge color="primary">{{followingArray.length}}</ion-badge>
-        </ion-label>
-        <ion-button (click)="openModal(FOLLOWING)">Open</ion-button>
+        <ion-chip>
+          <ion-label class="ion-margin-end">
+            Following
+          </ion-label>
+          <ion-badge color="dark">{{followingArray.length}}</ion-badge>
+        </ion-chip>
+        <ion-button class="ion-float-end" (click)="openModal(FOLLOWING)">Show</ion-button>
       </ion-item>
 
     </ion-card-content>
   </ion-card>
-
-  <ion-button class="" expand="block" routerLink="/user" routerDirection="forward">
-    Back
-  </ion-button>
+  
 </ion-content>
