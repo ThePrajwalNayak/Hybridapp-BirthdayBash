@@ -24,7 +24,8 @@
         loadingText="Loading more hackers...">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
-    <ion-fab class="light" vertical="bottom" horizontal="start" slot="fixed">
+    
+    <ion-fab *ngIf="users?.length > 89" class="light" vertical="bottom" horizontal="start" slot="fixed">
         <ion-fab-button (click)="backToTop()">
           <ion-icon name="arrow-dropup-circle"></ion-icon>
         </ion-fab-button>

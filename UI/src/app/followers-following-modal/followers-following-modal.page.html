@@ -1,23 +1,26 @@
 <ion-header>
-    <ion-toolbar>
-      <ion-title class="titleCase" text-center>{{user.login}} {{modalType | titlecase}}</ion-title>
-      <ion-icon slot="end" name="close" size="large" (click)="closeModal()"></ion-icon>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content padding>
-    <ion-list>
-      <ion-item *ngFor="let u of users">
-          <ion-avatar slot="start">
-            <img [src]="u.avatar_url"/>
-          </ion-avatar>
-          <ion-label text-center>
-              <h3>{{ u.login }}</h3>
-            </ion-label>
-      </ion-item>
-    </ion-list>
-    <ion-button (click)="backToTop()">
+  <ion-toolbar>
+    <ion-title class="titleCase" text-center>{{user.login}} {{modalType | titlecase}}</ion-title>
+    <ion-icon slot="end" name="close" size="large" (click)="closeModal()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let u of users">
+      <ion-avatar slot="start">
+        <img [src]="u.avatar_url" />
+      </ion-avatar>
+      <ion-label text-center>
+        <h3>{{ u.login }}</h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-row center *ngIf="users.length > 100">
+    <ion-col text-center>
+      <ion-button (click)="backToTop()">
         <ion-icon name="arrow-dropup-circle"></ion-icon>
-    </ion-button>
-  </ion-content>
-  
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>
