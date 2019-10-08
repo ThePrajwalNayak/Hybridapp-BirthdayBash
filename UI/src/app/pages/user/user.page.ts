@@ -15,9 +15,9 @@ export class UserPage implements OnInit {
   users: any;
   @ViewChild(IonInfiniteScroll, { static: false }) infiniteScroll: IonInfiniteScroll;
   @ViewChild(IonContent, { static: true }) content: IonContent;
-  
 
-  constructor(private userService: UserService, private router : Router) { }
+
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.getAllUsers(this.nextUserIndex);
@@ -48,16 +48,16 @@ export class UserPage implements OnInit {
     }, 1000);
   }
 
-  goToUserDetails(user){
+  goToUserDetails(user) {
     this.userService.setSelectedUser(user);
     this.router.navigate(['/userDetails']);
   }
 
-  goToHomePage(){
+  goToHomePage() {
     this.router.navigate(['/home']);
   }
 
-  backToTop(){
+  backToTop() {
     this.content.scrollToTop();
   }
 

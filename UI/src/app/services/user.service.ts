@@ -35,7 +35,7 @@ export class UserService {
     return this.httpClient.get('https://api.github.com/users/' + username);
   }
 
-  getFollower(username) {
+  getFollowers(username) {
     return this.httpClient.get('https://api.github.com/users/' + username + '/followers');
   }
 

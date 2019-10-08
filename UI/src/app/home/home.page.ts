@@ -11,24 +11,24 @@ import { FollowersFollowingModalPage } from '../followers-following-modal/follow
 })
 export class HomePage implements OnInit {
 
-  username : string = 'ThePrajwalNayak';
-  hackersHero : any;
-  FOLLOWERS : string = 'FOLLOWERS';
-  FOLLOWING : string = 'FOLLOWING';
-  followersArray : any = [];
-  followingArray : any = [];
-  repos : any = [];
-  constructor(private userService: UserService, private modalController : ModalController) { }
+  username: string = 'ThePrajwalNayak';
+  hackersHero: any;
+  FOLLOWERS: string = 'FOLLOWERS';
+  FOLLOWING: string = 'FOLLOWING';
+  followersArray: any = [];
+  followingArray: any = [];
+  repos: any = [];
+  constructor(private userService: UserService, private modalController: ModalController) { }
 
   ngOnInit() {
-    this.getHackersHero(this.username);
-    this.getFollowers(this.username);
-    this.getFollowing(this.username);
-    this.getRepository(this.username);
+    this.getHackersHero();
+    this.getFollowers();
+    this.getFollowing();
+    this.getRepository();
   }
 
-  getHackersHero(username: string) {
-    this.userService.getUserByUserName(username)
+  getHackersHero() {
+    this.userService.getUserByUserName(this.username)
       .subscribe(data => {
         this.hackersHero = data;
       }, error => {
@@ -36,8 +36,8 @@ export class HomePage implements OnInit {
       });
   }
 
-  getFollowers(username: string) {
-    this.userService.getFollower(username)
+  getFollowers() {
+    this.userService.getFollowers(this.username)
       .subscribe(data => {
         this.followersArray = data;
       }, error => {
@@ -45,8 +45,8 @@ export class HomePage implements OnInit {
       });
   }
 
-  getFollowing(username: string) {
-    this.userService.getFollowing(username)
+  getFollowing() {
+    this.userService.getFollowing(this.username)
       .subscribe(data => {
         this.followingArray = data;
       }, error => {
@@ -54,10 +54,10 @@ export class HomePage implements OnInit {
       });
   }
 
-  getRepository(username: string) {
-    this.userService.getRepoDetails(username)
+  getRepository() {
+    this.userService.getRepoDetails(this.username)
       .subscribe(data => {
-          this.repos = data;
+        this.repos = data;
       }, error => {
         console.log(error);
       });
@@ -65,17 +65,17 @@ export class HomePage implements OnInit {
 
   async openModal(modalType: string) {
     var input = {
-      'user' : null,
+      'user': null,
       'users': null,
       'modalType': null
     };
     if (modalType === this.FOLLOWERS) {
-      input.user  = this.hackersHero,
-      input.users = this.followersArray;
+      input.user = this.hackersHero,
+        input.users = this.followersArray;
       input.modalType = this.FOLLOWERS;
     } else {
-      input.user  = this.hackersHero,
-      input.users = this.followingArray;
+      input.user = this.hackersHero,
+        input.users = this.followingArray;
       input.modalType = this.FOLLOWING;
     }
     const modal = await this.modalController.create({

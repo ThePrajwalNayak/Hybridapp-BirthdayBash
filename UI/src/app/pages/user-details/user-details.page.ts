@@ -10,7 +10,7 @@ import { FollowersFollowingModalPage } from '../../followers-following-modal/fol
 })
 export class UserDetailsPage implements OnInit {
   user: any;
-  repos : any = [];
+  repos: any = [];
   FOLLOWERS: FollowersFollowingModalType = FollowersFollowingModalType.FOLLOWERS;
   FOLLOWING: FollowersFollowingModalType = FollowersFollowingModalType.FOLLOWING;
   followersArray: any = [];
@@ -25,19 +25,20 @@ export class UserDetailsPage implements OnInit {
     this.getRepoDetails();
     this.getFollower();
     this.getFollowing();
+    this.getRepository();
   }
 
-  getRepoDetails(){
+  getRepoDetails() {
     this.userService.getRepoDetails(this.user.login)
-    .subscribe(data => {
-      this.repos = data;
-    }, error => {
-      console.log(error);
-    });
+      .subscribe(data => {
+        this.repos = data;
+      }, error => {
+        console.log(error);
+      });
   }
 
   getFollower() {
-    this.userService.getFollower(this.user.login)
+    this.userService.getFollowers(this.user.login)
       .subscribe(data => {
         this.followersArray = data;
       }, error => {
@@ -54,21 +55,30 @@ export class UserDetailsPage implements OnInit {
       })
   }
 
+  getRepository() {
+    this.userService.getRepoDetails(this.user.login)
+      .subscribe(data => {
+        this.repos = data;
+      }, error => {
+        console.log(error);
+      });
+  }
+
 
 
   async openModal(modalType: FollowersFollowingModalType) {
     var input = {
-      'user' : null,
+      'user': null,
       'users': null,
       'modalType': null
     };
     if (modalType === this.FOLLOWERS) {
-      input.user  = this.user,
-      input.users = this.followersArray;
+      input.user = this.user,
+        input.users = this.followersArray;
       input.modalType = this.FOLLOWERS;
     } else {
-      input.user  = this.user,
-      input.users = this.followingArray;
+      input.user = this.user,
+        input.users = this.followingArray;
       input.modalType = this.FOLLOWING;
     }
     const modal = await this.modalController.create({
