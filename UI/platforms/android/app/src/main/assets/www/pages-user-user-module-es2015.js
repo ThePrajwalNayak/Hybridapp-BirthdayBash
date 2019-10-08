@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n      <ion-title>Hackers</ion-title> \n      <ion-button slot=\"start\" color=\"dark\" routerLink=\"/home\" routerDirection=\"forward\"> <ion-icon name=\"arrow-back\"></ion-icon>Back</ion-button>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item *ngFor=\"let user of users\">\n        <ion-avatar slot=\"start\">\n          <img [src]=\"user.avatar_url\"/>\n        </ion-avatar>\n        <ion-label text-wrap>\n            <h3>{{ user.login }}</h3>\n          </ion-label>\n          <ion-icon name=\"arrow-forward\" size=\"large\" (click)=\"goToUserDetails(user)\"></ion-icon>\n    </ion-item>\n  </ion-list>\n\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"loadData($event)\">\n      <ion-infinite-scroll-content\n        loadingSpinner=\"bubbles\"\n        loadingText=\"Loading more hackers...\">\n      </ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n    <ion-fab class=\"light\" vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\">\n        <ion-fab-button (click)=\"pageScroller()\">\n          <ion-icon name=\"arrow-dropup-circle\"></ion-icon>\n        </ion-fab-button>\n      </ion-fab>\n    <!-- <ion-button (click)=\"pageScroller()\"> Top</ion-button> -->\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title text-center>Hackers</ion-title>\n    <ion-button slot=\"start\" shape=\"round\" fill=\"outline\" color=\"primary\" routerLink=\"/home\" routerDirection=\"forward\">\n      <ion-icon name=\"arrow-back\"></ion-icon>Back\n    </ion-button>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item *ngFor=\"let user of users\">\n      <ion-avatar slot=\"start\">\n        <img [src]=\"user.avatar_url\" />\n      </ion-avatar>\n      <ion-label text-wrap>\n        <h3>{{ user.login }}</h3>\n      </ion-label>\n      <ion-icon name=\"arrow-forward\" size=\"large\" (click)=\"goToUserDetails(user)\"></ion-icon>\n    </ion-item>\n  </ion-list>\n\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"loadData($event)\">\n    <ion-infinite-scroll-content loadingSpinner=\"bubbles\" loadingText=\"Loading more hackers...\">\n    </ion-infinite-scroll-content>\n  </ion-infinite-scroll>\n\n  <ion-fab *ngIf=\"users?.length > 89\" class=\"light\" vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\">\n    <ion-fab-button (click)=\"backToTop()\">\n      <ion-icon name=\"arrow-dropup-circle\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n</ion-content>\n"
 
 /***/ }),
 
@@ -115,9 +115,9 @@ let UserPage = class UserPage {
                 event.target.complete();
                 // App logic to determine if all data is loaded
                 // and disable the infinite scroll
-                if (this.users.length > 90) {
-                    event.target.disabled = true;
-                }
+                // if (this.users.length > 90) {
+                //   event.target.disabled = true;
+                // }
             });
         }, 1000);
     }
@@ -128,8 +128,7 @@ let UserPage = class UserPage {
     goToHomePage() {
         this.router.navigate(['/home']);
     }
-    pageScroller() {
-        //scroll to page top
+    backToTop() {
         this.content.scrollToTop();
     }
 };
@@ -142,7 +141,7 @@ tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["IonInfiniteScroll"])
 ], UserPage.prototype, "infiniteScroll", void 0);
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["IonContent"], { static: false }),
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["IonContent"], { static: true }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["IonContent"])
 ], UserPage.prototype, "content", void 0);
 UserPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([

@@ -563,7 +563,7 @@ var UserService = /** @class */ (function () {
     UserService.prototype.getUserByUserName = function (username) {
         return this.httpClient.get('https://api.github.com/users/' + username);
     };
-    UserService.prototype.getFollower = function (username) {
+    UserService.prototype.getFollowers = function (username) {
         return this.httpClient.get('https://api.github.com/users/' + username + '/followers');
     };
     UserService.prototype.getFollowing = function (username) {

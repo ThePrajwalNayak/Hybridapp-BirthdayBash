@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>Hacker Detail</ion-title>\n    <ion-button slot=\"start\" color=\"dark\" routerLink=\"/user\" routerDirection=\"forward\">\n      <ion-icon name=\"arrow-back\"></ion-icon>Back\n    </ion-button>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n\n  <ion-card>\n    <ion-card-header>\n      <ion-card-title>\n        {{ user.login }}\n      </ion-card-title>\n      <ion-card-subtitle>\n        Hacker since 1957\n      </ion-card-subtitle>\n    </ion-card-header>\n    <ion-card-content text-center>\n      <img [src]=\"user.avatar_url\" class=\"info-img\">\n      {{ user.avatar_url }}\n\n      <ion-item>\n        <ion-chip>\n          <ion-label class=\"ion-margin-end\">\n            Followers\n          </ion-label>\n          <ion-badge color=\"dark\">{{followersArray.length}}</ion-badge>\n        </ion-chip>\n        <ion-button slot=\"end\" ion-button icon-end color=\"dark\" (click)=\"openModal(FOLLOWERS)\">\n          Open<ion-icon name=\"arrow-forward\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n      <ion-item>\n        <ion-chip>\n          <ion-label class=\"ion-margin-end\">\n            Following\n          </ion-label>\n          <ion-badge color=\"dark\">{{followingArray.length}}</ion-badge>\n        </ion-chip>\n        <ion-button slot=\"end\" ion-button icon-end color=\"dark\" (click)=\"openModal(FOLLOWING)\">\n          Open<ion-icon name=\"arrow-forward\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n    </ion-card-content>\n  </ion-card>\n\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title text-center>Hacker Detail</ion-title>\n    <ion-button slot=\"start\" shape=\"round\" fill=\"outline\" color=\"primary\" routerLink=\"/user\" routerDirection=\"forward\">\n      <ion-icon name=\"arrow-back\"></ion-icon>Back\n    </ion-button>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n\n  <ion-card>\n    <ion-card-header>\n      <ion-card-title>\n        {{ user.login }}\n      </ion-card-title>\n      <ion-card-subtitle>\n        Hacker since 1957\n      </ion-card-subtitle>\n    </ion-card-header>\n    <ion-card-content text-center>\n      <img [src]=\"user.avatar_url\" class=\"info-img\">\n      {{ user.avatar_url }}\n\n      <ion-item>\n        <ion-chip>\n          <ion-label class=\"ion-margin-end\">\n            Followers\n          </ion-label>\n          <ion-badge color=\"primary\">{{followersArray.length}}</ion-badge>\n        </ion-chip>\n\n        <ion-button shape=\"round\" fill=\"outline\" slot=\"end\" ion-button (click)=\"openModal(FOLLOWERS)\"\n          [disabled]=\"followersArray.length == 0\">\n          Open<ion-icon name=\"arrow-forward\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n      <ion-item>\n        <ion-chip>\n          <ion-label class=\"ion-margin-end\">\n            Following\n          </ion-label>\n          <ion-badge color=\"primary\">{{followingArray.length}}</ion-badge>\n        </ion-chip>\n        <ion-button shape=\"round\" fill=\"outline\" slot=\"end\" ion-button (click)=\"openModal(FOLLOWING)\"\n          [disabled]=\"followingArray.length == 0\">\n          Open<ion-icon name=\"arrow-forward\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n      <ion-list>\n        <ion-item *ngFor=\"let repo of repos\">\n          <ion-avatar slot=\"start\">\n            <img [src]=\"repo.owner.avatar_url\" />\n          </ion-avatar>\n          <ion-label text-wrap>\n            <h3>{{ repo.name }}</h3>\n          </ion-label>\n          <ion-icon name=\"arrow-down\" size=\"large\"></ion-icon>\n        </ion-item>\n      </ion-list>\n\n    </ion-card-content>\n  </ion-card>\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -108,6 +108,7 @@ var UserDetailsPage = /** @class */ (function () {
         this.getRepoDetails();
         this.getFollower();
         this.getFollowing();
+        this.getRepository();
     };
     UserDetailsPage.prototype.getRepoDetails = function () {
         var _this = this;
@@ -120,7 +121,7 @@ var UserDetailsPage = /** @class */ (function () {
     };
     UserDetailsPage.prototype.getFollower = function () {
         var _this = this;
-        this.userService.getFollower(this.user.login)
+        this.userService.getFollowers(this.user.login)
             .subscribe(function (data) {
             _this.followersArray = data;
         }, function (error) {
@@ -132,6 +133,15 @@ var UserDetailsPage = /** @class */ (function () {
         this.userService.getFollowing(this.user.login)
             .subscribe(function (data) {
             _this.followingArray = data;
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    UserDetailsPage.prototype.getRepository = function () {
+        var _this = this;
+        this.userService.getRepoDetails(this.user.login)
+            .subscribe(function (data) {
+            _this.repos = data;
         }, function (error) {
             console.log(error);
         });
