@@ -24,5 +24,10 @@
         loadingText="Loading more hackers...">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
-
+    <ion-fab class="light" vertical="bottom" horizontal="start" slot="fixed">
+        <ion-fab-button (click)="pageScroller()">
+          <ion-icon name="arrow-dropup-circle"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    <!-- <ion-button (click)="pageScroller()"> Top</ion-button> -->
 </ion-content>

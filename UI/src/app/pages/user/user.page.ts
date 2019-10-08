@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { IonContent } from '@ionic/angular';
 
 import { UserService } from '../../services/user.service';
 
@@ -13,6 +14,8 @@ export class UserPage implements OnInit {
   nextUserIndex = 0;
   users: any;
   @ViewChild(IonInfiniteScroll, { static: false }) infiniteScroll: IonInfiniteScroll;
+  @ViewChild(IonContent, { static: false }) content: IonContent;
+  
 
   constructor(private userService: UserService, private router : Router) { }
 
@@ -52,6 +55,11 @@ export class UserPage implements OnInit {
 
   goToHomePage(){
     this.router.navigate(['/home']);
+  }
+
+  public pageScroller(){
+    //scroll to page top
+    this.content.scrollToTop();
   }
 
 }
