@@ -10,7 +10,7 @@
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>
+      <ion-card-title *ngIf="hackersHero">
         {{ hackersHero.login }}
       </ion-card-title>
       <ion-card-subtitle>
@@ -19,7 +19,31 @@
       </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content text-center>
-      <img [src]="hackersHero.avatar_url" class="info-img">
+      <img *ngIf="hackersHero" [src]="hackersHero.avatar_url" class="info-img">
+      <ion-item>
+          <ion-chip>
+            <ion-label class="ion-margin-end">
+              Followers
+            </ion-label>
+            <ion-badge color="primary">{{followersArray.length}}</ion-badge>
+          </ion-chip>
+  
+          <ion-button shape="round" fill="outline" slot="end" ion-button (click)="openModal(FOLLOWERS)" [disabled]="followersArray.length == 0">
+            Open<ion-icon name="arrow-forward"></ion-icon>
+          </ion-button>
+        </ion-item>
+  
+        <ion-item>
+          <ion-chip>
+            <ion-label class="ion-margin-end">
+              Following
+            </ion-label>
+            <ion-badge color="primary">{{followingArray.length}}</ion-badge>
+          </ion-chip>
+          <ion-button shape="round" fill="outline" slot="end" ion-button (click)="openModal(FOLLOWING)" [disabled]="followingArray.length == 0">
+            Open<ion-icon name="arrow-forward"></ion-icon>
+          </ion-button>
+        </ion-item>
       <ion-button expand="block" routerLink="/user" routerDirection="forward">
         More Hackers
       </ion-button>
