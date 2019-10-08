@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Hacker Detail</ion-title>
-    <ion-button color="dark" routerLink="/user" routerDirection="forward">
+    <ion-button slot="start" color="dark" routerLink="/user" routerDirection="forward">
       <ion-icon name="arrow-back"></ion-icon>Back
     </ion-button>
   </ion-toolbar>
@@ -29,7 +29,9 @@
           </ion-label>
           <ion-badge color="dark">{{followersArray.length}}</ion-badge>
         </ion-chip>
-        <ion-button class="ion-float-right" (click)="openModal(FOLLOWERS)">Show</ion-button>
+        <ion-button slot="end" ion-button icon-end color="dark" (click)="openModal(FOLLOWERS)">
+          Open<ion-icon name="arrow-forward"></ion-icon>
+        </ion-button>
       </ion-item>
 
       <ion-item>
@@ -39,10 +41,12 @@
           </ion-label>
           <ion-badge color="dark">{{followingArray.length}}</ion-badge>
         </ion-chip>
-        <ion-button class="ion-float-end" (click)="openModal(FOLLOWING)">Show</ion-button>
+        <ion-button slot="end" ion-button icon-end color="dark" (click)="openModal(FOLLOWING)">
+          Open<ion-icon name="arrow-forward"></ion-icon>
+        </ion-button>
       </ion-item>
 
     </ion-card-content>
   </ion-card>
-  
+
 </ion-content>
