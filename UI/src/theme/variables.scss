@@ -88,29 +88,33 @@
   --ion-toolbar-background: #FFDE03;
 
   @font-face {
-    font-family: 'Roboto';
+    font-family: 'Roboto-Normal';
+    font-style: normal;
+    font-weight: 400;
     src: url('../assets/fonts/roboto/Roboto-Regular.ttf');
   }
-
+  
   @font-face {
-    font-family: 'Roboto';
-    src: url('../assets/fonts/roboto/Roboto-Light.ttf');
+    font-family: 'Roboto-Medium';
+    font-style: 500;
+    font-weight: 600;
+    src: url('../assets/fonts/roboto/Roboto-Medium.ttf');
+  }
+  
+  @font-face {
+    font-family: 'Roboto-Bold';
+    font-style: bold;
+    font-weight: 700;
+    src: url('../assets/fonts/roboto/Roboto-Bold.ttf');
   }
 
-  @font-face {
-    font-family: 'Roboto';
-    src: url('../assets/fonts/roboto/Roboto-Black.ttf');
-  }
 
-  @font-face {
-    font-family: 'Roboto';
-    src: url('../assets/fonts/roboto/Roboto-BoldItalic.ttf');
-  }
-
-  --ion-font-family: 'Roboto';
-
+  --ion-font-family: 'Roboto-Normal';
+  
 
 }
+
+
 
 // https://material.io/design/color/#color-theme-creation
 // 0336FF
