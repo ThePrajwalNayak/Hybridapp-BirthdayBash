@@ -86,7 +86,28 @@
 
   // --ion-background-color:       #FFDE03;
   --ion-toolbar-background: #FFDE03;
- 
+
+  @font-face {
+    font-family: 'Roboto';
+    src: url('../assets/fonts/roboto/Roboto-Regular.ttf');
+  }
+
+  @font-face {
+    font-family: 'Roboto';
+    src: url('../assets/fonts/roboto/Roboto-Light.ttf');
+  }
+
+  @font-face {
+    font-family: 'Roboto';
+    src: url('../assets/fonts/roboto/Roboto-Black.ttf');
+  }
+
+  @font-face {
+    font-family: 'Roboto';
+    src: url('../assets/fonts/roboto/Roboto-BoldItalic.ttf');
+  }
+
+  --ion-font-family: 'Roboto';
 
 
 }
