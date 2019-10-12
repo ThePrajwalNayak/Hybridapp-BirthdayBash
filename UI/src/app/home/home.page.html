@@ -7,6 +7,7 @@
 </ion-header>
 
 <ion-content>
+
   <ion-card>
     <ion-card-header>
       <ion-card-title *ngIf="hackersHero">
@@ -42,17 +43,29 @@
         </ion-button>
       </ion-item>
 
-      <ion-list>
-        <ion-item *ngFor="let repo of repos">
-          <ion-avatar slot="start">
-            <img [src]="repo.owner.avatar_url" />
-          </ion-avatar>
-          <ion-label text-wrap>
-            <h3>{{ repo.name }}</h3>
-          </ion-label>
-          <ion-icon name="arrow-down" size="large"></ion-icon>
-        </ion-item>
-      </ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="1">
+            <span class="slider-nav arrow-prev" (click)="slidePrev(slider,slideWithNav)">
+              <ion-icon name="arrow-dropleft" class="prev-icon-custom custon-nav" [class.disabled]="slider.isBeginningSlide"></ion-icon>
+            </span>
+          </ion-col>
+          <ion-col size="10">
+            <ion-slides pager="true" [options]="slideOptsOne" #slideWithNav
+              (ionSlideDidChange)="SlideDidChange(slider,slideWithNav)">
+              <ion-slide *ngFor="let repo of slider.slidesItems">
+                {{repo.name}}
+                <!-- <img src="{{}}"> -->
+              </ion-slide>
+            </ion-slides>
+          </ion-col>
+          <ion-col size="1">
+            <span class="slider-nav arrow-next" (click)="slideNext(slider,slideWithNav)">
+              <ion-icon name="arrow-dropright" class="next-icon-custom custon-nav" [class.disabled]="slider.isEndSlide"></ion-icon>
+            </span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
       <ion-row center>
         <ion-col text-center>
@@ -61,7 +74,6 @@
           </ion-button>
         </ion-col>
       </ion-row>
-
 
     </ion-card-content>
   </ion-card>

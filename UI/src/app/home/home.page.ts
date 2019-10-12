@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ModalController, IonSlides } from '@ionic/angular';
 
 import { UserService } from '../services/user.service';
 import { FollowersFollowingModalPage } from '../followers-following-modal/followers-following-modal.page';
@@ -18,6 +18,19 @@ export class HomePage implements OnInit {
   followersArray: any = [];
   followingArray: any = [];
   repos: any = [];
+
+  homeSliderConfig = {
+    initialSlide: 0,
+    slidesPerView: 1,
+    autoplay:true
+  }
+  slider: any = {
+    isBeginningSlide: true,
+    isEndSlide: false,
+    slidesItems: []
+  }
+  @ViewChild('slideWithNav', { static: true }) slideWithNav: IonSlides;
+
   constructor(private userService: UserService, private modalController: ModalController) { }
 
   ngOnInit() {
@@ -58,6 +71,7 @@ export class HomePage implements OnInit {
     this.userService.getRepoDetails(this.username)
       .subscribe(data => {
         this.repos = data;
+        this.slider.slidesItems = data;
       }, error => {
         console.log(error);
       });
@@ -93,5 +107,40 @@ export class HomePage implements OnInit {
     return await modal.present();
   }
 
+     //Move to Next slide
+  slideNext(object, slideView) {
+    slideView.slideNext(500).then(() => {
+      this.checkIfNavDisabled(object, slideView);
+    });
+  }
+ 
+  //Move to previous slide
+  slidePrev(object, slideView) {
+    slideView.slidePrev(500).then(() => {
+      this.checkIfNavDisabled(object, slideView);
+    });;
+  }
+ 
+  //Method called when slide is changed by drag or navigation
+  SlideDidChange(object, slideView) {
+    this.checkIfNavDisabled(object, slideView);
+  }
+ 
+  //Call methods to check if slide is first or last to enable disbale navigation  
+  checkIfNavDisabled(object, slideView) {
+    this.checkisBeginning(object, slideView);
+    this.checkisEnd(object, slideView);
+  }
+ 
+  checkisBeginning(object, slideView) {
+    slideView.isBeginning().then((istrue) => {
+      object.isBeginningSlide = istrue;
+    });
+  }
+  checkisEnd(object, slideView) {
+    slideView.isEnd().then((istrue) => {
+      object.isEndSlide = istrue;
+    });
+  }
 
 }
