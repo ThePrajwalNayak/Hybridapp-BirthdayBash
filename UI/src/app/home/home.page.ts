@@ -11,7 +11,8 @@ import { FollowersFollowingModalPage } from '../followers-following-modal/follow
 })
 export class HomePage implements OnInit {
 
-  username: string = 'ThePrajwalNayak';
+  // username: string = 'ThePrajwalNayak';
+  username: string = 'defunkt';
   hackersHero: any;
   FOLLOWERS: string = 'FOLLOWERS';
   FOLLOWING: string = 'FOLLOWING';
@@ -22,7 +23,8 @@ export class HomePage implements OnInit {
   homeSliderConfig = {
     initialSlide: 0,
     slidesPerView: 1,
-    autoplay:true
+    autoplay:true,
+    centeredSlides: true
   }
   slider: any = {
     isBeginningSlide: true,
