@@ -1,6 +1,6 @@
 <ion-header no-border>
   <ion-toolbar>
-    <ion-title text-center>
+    <ion-title class="ion-text-left">
       Hackers Hero
     </ion-title>
   </ion-toolbar>
@@ -42,35 +42,71 @@
           <ion-icon name="arrow-forward"></ion-icon>
         </ion-button>
       </ion-item>
+
+      <ion-item lines="none">
+          <ion-chip>
+            <ion-label class="ion-margin-end">Projects</ion-label>
+            <ion-badge color="primary">{{repos.length}}</ion-badge>
+          </ion-chip>
+          <ion-button slot="end" (click)="openModal(FOLLOWERS)" [disabled]="followersArray.length == 0">
+            <ion-icon name="arrow-down"></ion-icon>
+          </ion-button>
+        </ion-item>
+
       <div class="homeSlider">
-        Start
-      <ion-grid>
-        <ion-row>
-          <ion-col size="1">
-            <span class="slider-nav arrow-prev" (click)="slidePrev(slider,slideWithNav)">
-              <ion-icon name="arrow-dropleft" class="prev-icon-custom custon-nav" [class.disabled]="slider.isBeginningSlide"></ion-icon>
-            </span>
-          </ion-col>
-          <ion-col size="10">
-            <ion-slides pager="true" [options]="slideOptsOne" #slideWithNav
-              (ionSlideDidChange)="SlideDidChange(slider,slideWithNav)">
-              <ion-slide *ngFor="let repo of slider.slidesItems">
-                <p>{{repo.name}}</p>
-                <p>{{repo.description}}</p>
-                <p>{{repo.language}}</p>
-                <p>{{repo.open_issues_count}}</p>
-                <img [src]="repo.owner.avatar_url" />
-              </ion-slide>
-            </ion-slides>
-          </ion-col>
-          <ion-col size="1">
-            <span class="slider-nav arrow-next" (click)="slideNext(slider,slideWithNav)">
-              <ion-icon name="arrow-dropright" class="next-icon-custom custon-nav" [class.disabled]="slider.isEndSlide"></ion-icon>
-            </span>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      END
+        <ion-grid>
+          <ion-row>
+            <ion-col size="1">
+              <span class="slider-nav arrow-prev" (click)="slidePrev(slider,slideWithNav)">
+                <ion-icon name="arrow-dropleft" class="prev-icon-custom custon-nav"
+                  [class.disabled]="slider.isBeginningSlide"></ion-icon>
+              </span>
+            </ion-col>
+            <ion-col size="9">
+              <ion-slides pager="true" [options]="slideOptsOne" #slideWithNav
+                (ionSlideDidChange)="SlideDidChange(slider,slideWithNav)">
+                <ion-slide *ngFor="let repo of slider.slidesItems">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col size="6">Name</ion-col>
+                      <ion-col size="6">{{repo.name}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col size="6">Description</ion-col>
+                      <ion-col size="6">{{repo.description}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col size="6">Language</ion-col>
+                      <ion-col size="6">{{repo.language}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col size="6">Open Issue</ion-col>
+                      <ion-col size="6">{{repo.open_issues_count}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col size="6">Created At</ion-col>
+                      <ion-col size="6">{{repo.created_at}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col size="6">Last Updated</ion-col>
+                      <ion-col size="6">{{repo.updated_at}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col size="6">watchers</ion-col>
+                      <ion-col size="6">{{repo.watchers}}</ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-slide>
+              </ion-slides>
+            </ion-col>
+            <ion-col size="1">
+              <span class="slider-nav arrow-next" (click)="slideNext(slider,slideWithNav)">
+                <ion-icon name="arrow-dropright" class="next-icon-custom custon-nav"
+                  [class.disabled]="slider.isEndSlide"></ion-icon>
+              </span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </div>
 
       <ion-row center>
@@ -84,7 +120,7 @@
     </ion-card-content>
   </ion-card>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button>Follow</ion-fab-button>
+    <ion-fab-button color="secondary">Follow</ion-fab-button>
     <ion-fab-list side="top">
       <ion-fab-button target="_blank" href="https://www.linkedin.com/in/theprajwalnayak/">
         <ion-icon name="logo-linkedin"></ion-icon>

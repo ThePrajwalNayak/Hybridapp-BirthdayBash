@@ -23,8 +23,8 @@ export class HomePage implements OnInit {
   homeSliderConfig = {
     initialSlide: 0,
     slidesPerView: 1,
-    autoplay:true,
-    centeredSlides: true
+    autoplay:false,
+    centeredSlides: false
   }
   slider: any = {
     isBeginningSlide: true,
