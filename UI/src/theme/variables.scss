@@ -76,10 +76,6 @@
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 
-
-  // --ion-background-color:       #0336FF;
-  --ion-toolbar-background: #FFDE03;
-
   @font-face {
     font-family: 'OpenSans-Light';
     font-style: normal;
@@ -93,13 +89,18 @@
   }
 
   @font-face {
-    font-family: 'OpenSans-SemiBld';
+    font-family: 'OpenSans-SemiBold';
     src: url('../assets/fonts/OpenSans/OpenSans-Semibold.ttf');
   }
 
+  @font-face {
+    font-family: 'OpenSans-Bold';
+    src: url('../assets/fonts/OpenSans/OpenSans-Bold.ttf');
+  }
+
   --ion-font-family: 'OpenSans-Regular';
-  --ion-safe-area-top: 10px;
-  --ion-safe-area-bottom: 12px;
+  // --ion-background-color:       #0336FF;
+  --ion-toolbar-background: #FFDE03;
 
 }
 

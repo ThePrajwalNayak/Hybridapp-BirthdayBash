@@ -1,45 +1,12 @@
-.custon-nav {
-    height: 48px;
-    width: 20px;
-    cursor: pointer;
-    vertical-align: middle;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+.repo-avatar{
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    background: orange;
+    color: white;
+    font-weight: bolder;
 }
 
-.prev-icon-custom.disabled {
-    opacity: 0.4;
-    cursor: default;
+.repo-name {
+    font-family: 'OpenSans-Bold';
 }
-
-.next-icon-custom.disabled {
-    opacity: 0.4;
-    cursor: default;
-}
-
-.slider-nav {
-    ion-icon {
-        height: 100%;
-    }
-}
-
-.swiper-pagination-bullets{
-    // bottom: -100px !important;
-}
-
-.homeSlider{
-    // background: green;
-    color: black;
-    position: relative;
-    height: auto;
-    // height: 350px;
-}
-
-
-
-//   ion-card {
-//     --ion-background-color : white !important;
-
-//   }
-
