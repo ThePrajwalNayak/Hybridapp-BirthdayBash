@@ -96,4 +96,9 @@ export class UserDetailsPage implements OnInit {
     return await modal.present();
   }
 
+
+  avatarLetter(word) {
+    return word.charAt(0).toUpperCase();
+}
+
 }
