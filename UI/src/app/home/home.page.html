@@ -8,8 +8,8 @@
 
 <ion-content>
 
-  <ion-card>
-    <ion-card-header>
+  <ion-card class="hacker-card">
+    <ion-card-header text-center>
       <ion-card-title *ngIf="hackersHero">
         #{{ hackersHero.login }}
       </ion-card-title>
@@ -17,10 +17,8 @@
         Full Statck Developer, Benaglore
       </ion-card-subtitle>
     </ion-card-header>
-
-    <ion-card-content text-center>
-      <img *ngIf="hackersHero" [src]="hackersHero.avatar_url" class="info-img">
-
+    <ion-card-content text-center class="hacker-card-content">
+      <img *ngIf="hackersHero" [src]="hackersHero.avatar_url" class="hacker-img">
       <ion-item lines="none" class="ion-margin-top">
         <ion-chip>
           <ion-label class="ion-margin-end">Followers</ion-label>
@@ -30,7 +28,6 @@
           <ion-icon name="arrow-forward"></ion-icon>
         </ion-button>
       </ion-item>
-
       <ion-item lines="none" class="ion-margin-bottom">
         <ion-chip>
           <ion-label class="ion-margin-end">
@@ -41,42 +38,42 @@
         <ion-button slot="end" (click)="openModal(FOLLOWING)" [disabled]="followingArray.length == 0">
           <ion-icon name="arrow-forward"></ion-icon>
         </ion-button>
-      </ion-item >
-
+      </ion-item>
       <ion-item lines="none" class="ion-margin-top ion-margin-bottom">
-          <ion-chip>
-            <ion-label class="ion-margin-end">Projects</ion-label>
-            <ion-badge color="primary">{{repos.length}}</ion-badge>
-          </ion-chip>
-          <!-- <ion-button slot="end" (click)="openModal(FOLLOWERS)" [disabled]="followersArray.length == 0">
-            <ion-icon name="arrow-down"></ion-icon>
-          </ion-button> -->
+        <ion-chip>
+          <ion-label class="ion-margin-end">Projects</ion-label>
+          <ion-badge color="primary">{{repos.length}}</ion-badge>
+        </ion-chip>
+      </ion-item>
+      <ion-list>
+        <ion-item *ngFor="let repo of repos">
+          <ion-avatar slot="start" class="repo-avatar">
+            <div>
+              <p>{{avatarLetter(repo.name)}}</p>
+            </div>
+          </ion-avatar>
+          <ion-label>
+            <ion-text class="repo-name">
+              <h2>{{repo.name}}</h2>
+            </ion-text>
+            <p>{{repo.created_at | date : 'mediumDate' }}</p>
+            <ion-text>
+              <p>{{repo.language}}</p>
+            </ion-text>
+          </ion-label>
         </ion-item>
-
-        <ion-list>
-            <ion-item *ngFor="let repo of repos">
-              <ion-label>
-                  <ion-text class="repo-name">
-                      <h2>{{repo.name}}</h2>
-                    </ion-text>
-                    <p>{{repo.created_at | date : 'mediumDate' }}</p>
-                    <ion-text>
-                      <p>{{repo.language}}</p>
-                    </ion-text>
-              </ion-label>
-            </ion-item>
-          </ion-list>
-          
-      <ion-row center>
-        <ion-col text-center>
-          <ion-button routerLink="/user" routerDirection="forward">
-            More Hackers
-          </ion-button>
-        </ion-col>
-      </ion-row>
-
+      </ion-list>
     </ion-card-content>
   </ion-card>
+
+  <ion-row center>
+    <ion-col text-center>
+      <ion-button routerLink="/user" routerDirection="forward">
+        More Hackers
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="secondary">Follow</ion-fab-button>
     <ion-fab-list side="top">

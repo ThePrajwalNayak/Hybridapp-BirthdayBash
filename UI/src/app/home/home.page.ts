@@ -96,7 +96,7 @@ export class HomePage implements OnInit {
   }
 
   avatarLetter(word) {
-    return word.charAt(0);
+      return word.charAt(0).toUpperCase();
   }
 
 }
