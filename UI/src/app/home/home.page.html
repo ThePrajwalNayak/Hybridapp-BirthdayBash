@@ -6,7 +6,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
 
   <ion-card class="hacker-card">
     <ion-card-header text-center>
@@ -19,27 +19,33 @@
     </ion-card-header>
     <ion-card-content text-center class="hacker-card-content">
       <img *ngIf="hackersHero" [src]="hackersHero.avatar_url" class="hacker-img">
-      <ion-item lines="none" class="ion-margin-top">
+
+      <ion-item class="ion-margin-top">
         <ion-chip>
-          <ion-label class="ion-margin-end">Followers</ion-label>
+          <ion-label class="ion-margin-end">
+            Followers
+          </ion-label>
           <ion-badge color="primary">{{followersArray.length}}</ion-badge>
         </ion-chip>
-        <ion-button slot="end" (click)="openModal(FOLLOWERS)" [disabled]="followersArray.length == 0">
-          <ion-icon name="arrow-forward"></ion-icon>
+        <ion-button shape="round" fill="outline" slot="end" ion-button (click)="openModal(FOLLOWERS)"
+          [disabled]="followersArray.length == 0">
+          Open<ion-icon name="arrow-forward"></ion-icon>
         </ion-button>
       </ion-item>
-      <ion-item lines="none" class="ion-margin-bottom">
+
+      <ion-item>
         <ion-chip>
           <ion-label class="ion-margin-end">
             Following
           </ion-label>
           <ion-badge color="primary">{{followingArray.length}}</ion-badge>
         </ion-chip>
-        <ion-button slot="end" (click)="openModal(FOLLOWING)" [disabled]="followingArray.length == 0">
-          <ion-icon name="arrow-forward"></ion-icon>
+        <ion-button shape="round" fill="outline" slot="end" ion-button (click)="openModal(FOLLOWING)"
+          [disabled]="followingArray.length == 0">
+          Open<ion-icon name="arrow-forward"></ion-icon>
         </ion-button>
       </ion-item>
-      <ion-item lines="none" class="ion-margin-top ion-margin-bottom">
+      <ion-item lines="none" class="ion-margin-top">
         <ion-chip>
           <ion-label class="ion-margin-end">Projects</ion-label>
           <ion-badge color="primary">{{repos.length}}</ion-badge>
@@ -73,6 +79,14 @@
       </ion-button>
     </ion-col>
   </ion-row>
+
+  <ion-row center>
+      <ion-col text-center>
+        <ion-button routerLink="/user" routerDirection="forward">
+          More Hackers
+        </ion-button>
+      </ion-col>
+    </ion-row>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="secondary">Follow</ion-fab-button>
