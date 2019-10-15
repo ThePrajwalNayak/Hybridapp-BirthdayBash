@@ -1,0 +1,104 @@
+<ion-header no-border>
+    <ion-toolbar>
+      <ion-title text-center>
+        Hackers Hero
+      </ion-title>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding>
+  
+    <ion-card class="hacker-card">
+      <ion-card-header text-center>
+        <ion-card-title *ngIf="hackersHero">
+          #{{ hackersHero.login }}
+        </ion-card-title>
+        <ion-card-subtitle>
+          Full Statck Developer, Benaglore
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content text-center class="hacker-card-content">
+        <img *ngIf="hackersHero" [src]="hackersHero.avatar_url" class="hacker-img">
+  
+        <ion-item class="ion-margin-top">
+          <ion-chip>
+            <ion-label class="ion-margin-end">
+              Followers
+            </ion-label>
+            <ion-badge color="primary">{{followersArray.length}}</ion-badge>
+          </ion-chip>
+          <ion-button shape="round" fill="outline" slot="end" ion-button (click)="openModal(FOLLOWERS)"
+            [disabled]="followersArray.length == 0">
+            Open<ion-icon name="arrow-forward"></ion-icon>
+          </ion-button>
+        </ion-item>
+  
+        <ion-item>
+          <ion-chip>
+            <ion-label class="ion-margin-end">
+              Following
+            </ion-label>
+            <ion-badge color="primary">{{followingArray.length}}</ion-badge>
+          </ion-chip>
+          <ion-button shape="round" fill="outline" slot="end" ion-button (click)="openModal(FOLLOWING)"
+            [disabled]="followingArray.length == 0">
+            Open<ion-icon name="arrow-forward"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <ion-item lines="none" class="ion-margin-top">
+          <ion-chip>
+            <ion-label class="ion-margin-end">Projects</ion-label>
+            <ion-badge color="primary">{{repos.length}}</ion-badge>
+          </ion-chip>
+        </ion-item>
+        <ion-list>
+          <ion-item *ngFor="let repo of repos">
+            <ion-avatar slot="start" class="repo-avatar">
+              <div>
+                <p>{{avatarLetter(repo.name)}}</p>
+              </div>
+            </ion-avatar>
+            <ion-label>
+              <ion-text class="repo-name">
+                <h3>{{repo.name}}</h3>
+              </ion-text>
+              <p>{{repo.created_at | date : 'mediumDate' }}</p>
+              <ion-text>
+                <p>{{repo.language}}</p>
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  
+    <ion-row center>
+      <ion-col text-center>
+        <ion-button color="secondary" routerLink="/user" routerDirection="forward">
+          More Hackers
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button color="secondary">Follow</ion-fab-button>
+      <ion-fab-list side="top">
+        <ion-fab-button target="_blank" href="https://www.linkedin.com/in/theprajwalnayak/">
+          <ion-icon name="logo-linkedin"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button target="_blank" href="https://twitter.com/theprajwalnayak">
+          <ion-icon name="logo-twitter"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button target="_blank" href="https://www.facebook.com/theprajwalnayak">
+          <ion-icon name="logo-facebook"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button target="_blank" href="https://github.com/theprajwalnayak">
+          <ion-icon name="logo-github"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+  </ion-content>
+  
