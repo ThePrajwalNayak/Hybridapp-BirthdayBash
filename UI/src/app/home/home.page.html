@@ -25,11 +25,11 @@
   </ion-row>
 
 
-  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)"></ion-searchbar>
+  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)" (ionCancel)="resetSearchTerm($event)"></ion-searchbar>
 
   <ion-item>
     <ion-label>Select Searchtype</ion-label>
-    <ion-select [(ngModel)]="type" (ionChange)="searchChanged($event)">
+    <ion-select [(ngModel)]="type" (ionChange)="filterChanged($event)">
       <ion-select-option value="Users">Loginname</ion-select-option>
       <ion-select-option value="repositories">Repositories</ion-select-option>
     </ion-select>
