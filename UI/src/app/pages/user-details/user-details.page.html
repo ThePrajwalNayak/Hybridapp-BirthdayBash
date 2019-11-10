@@ -74,6 +74,16 @@
             </ion-label>
           </ion-item>
         </ion-list>
+
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+            <ion-fab-button color="secondary">Follow</ion-fab-button>
+            <ion-fab-list side="top">
+              <ion-fab-button target="_blank" href="{{user.html_url}}">
+                <ion-icon name="logo-github"></ion-icon>
+              </ion-fab-button>
+            </ion-fab-list>
+          </ion-fab>
+
       </ion-card-content>
     <!-- end -->
 
