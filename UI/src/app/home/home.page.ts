@@ -23,20 +23,36 @@ export class HomePage implements OnInit {
 
   }
 
-  searchChanged() {
+  searchChanged(event) {
+    console.log(event.detail.value);
     // Call our service function which returns an Observable
-    this.userService.searchData(this.searchTerm, this.type)
-    .subscribe(data => {
+    if (this.searchTerm) {
+      this.userService.searchData(this.searchTerm, this.type)
+        .subscribe(data => {
+          this.prepareResult(data);
+        }, error => {
+          console.log(error);
+        });
+    }
+  }
+
+  prepareResult(data){
+    this.results = [];
+    if(this.type == 'Users'){
       this.results.push(data);
-      debugger
-    }, error => {
-      console.log(error);
-    })
+    }else if(this.type == 'repositories'){
+      let objCopy  = JSON.parse(JSON.stringify(data.items));
+      this.results = objCopy;
+    }
   }
 
   goToUserDetails(user) {
     this.userService.setSelectedUser(user);
     this.router.navigate(['/userDetails']);
   }
+
+  avatarLetter(word) {
+    return word.charAt(0).toUpperCase();
+}
 
 }

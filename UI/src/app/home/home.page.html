@@ -6,7 +6,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="home-content">
 
   <ion-row center>
     <ion-col text-center>
@@ -36,7 +36,7 @@
   </ion-item>
 
   <ion-list>
-    
+
     <div *ngIf="type == 'Users'">
       <ion-item *ngFor="let user of results">
         <ion-avatar slot="start">
@@ -46,6 +46,25 @@
           <h3>{{ user.login }}</h3>
         </ion-label>
         <ion-icon name="arrow-forward" size="large" (click)="goToUserDetails(user)"></ion-icon>
+      </ion-item>
+    </div>
+
+    <div *ngIf="type == 'repositories'">
+      <ion-item *ngFor="let repo of results">
+        <ion-avatar slot="start" class="repo-avatar">
+          <div>
+            <p>{{avatarLetter(repo.name)}}</p>
+          </div>
+        </ion-avatar>
+        <ion-label>
+          <ion-text class="repo-name">
+            <h3>{{repo.name}}</h3>
+          </ion-text>
+          <p>{{repo.created_at | date : 'mediumDate' }}</p>
+          <ion-text>
+            <p>{{repo.language}}</p>
+          </ion-text>
+        </ion-label>
       </ion-item>
     </div>
 

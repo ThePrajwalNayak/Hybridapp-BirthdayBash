@@ -99,6 +99,6 @@ export class UserDetailsPage implements OnInit {
 
   avatarLetter(word) {
     return word.charAt(0).toUpperCase();
-}
+  }
 
 }
