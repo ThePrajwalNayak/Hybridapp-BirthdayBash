@@ -6,8 +6,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding class="home-content">
-  <ion-card>
+<ion-content padding class="home-content ion-margin-bottom">
+  <ion-card class="ion-margin-bottom">
     <img src="/assets/Images/bg.png" />
     <ion-grid>
       <ion-row>
@@ -34,16 +34,16 @@
     </ion-grid>
   </ion-card>
 
-  <ion-card class="search-card">
+  <ion-card class="search-card ion-margin-bottom">
     <ion-card-header>
       <ion-card-title>Search GitHub</ion-card-title>
       <ion-card-subtitle text-capitalize>Find users via github login name [ Name must match login name exactly ], find repositories
         via github repo name [ Can be nearest match ] </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <ion-searchbar [(ngModel)]="searchTerm" [placeholder]="searchPlaceholder" (ionChange)="searchChanged($event)"
+      <ion-searchbar class="ion-margin-bottom" [(ngModel)]="searchTerm" [placeholder]="searchPlaceholder" (ionChange)="searchChanged($event)"
         (ionCancel)="resetSearchTerm($event)"></ion-searchbar>
-      <ion-item>
+      <ion-item class="ion-margin-bottom">
         <ion-label>Search Type</ion-label>
         <ion-select [(ngModel)]="type" (ionChange)="filterChanged($event)">
           <ion-select-option value="Users">Name</ion-select-option>
@@ -86,20 +86,32 @@
 
   </ion-card>
 
-  <ion-row center>
+  <ion-row center class="ion-margin-top">
     <ion-col text-center>
-      <ion-button expand="full" color="secondary" routerLink="/hacker" routerDirection="forward">
+      <ion-button expand="block" color="secondary" routerLink="/hacker" routerDirection="forward">
         Meet Hackers Hero
       </ion-button>
     </ion-col>
   </ion-row>
 
-  <ion-row center>
+  <ion-row center class="ion-margin-bottom">
     <ion-col text-center>
-      <ion-button expand="full" color="secondary" routerLink="/user" routerDirection="forward">
+      <ion-button expand="block" color="secondary" routerLink="/user" routerDirection="forward">
         Browse Hackers Profile
       </ion-button>
     </ion-col>
   </ion-row>
 
+  <ion-card class="home-quote">
+      <div class="blockquote-wrapper">
+          <div class="blockquote">
+            <h1>
+              To Finish a Job, First Begin
+             </h1>
+            <h4>&mdash;Shankar Nag</h4>
+          </div>
+        </div>
+  </ion-card>
+
 </ion-content>
+
