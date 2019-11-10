@@ -8,13 +8,13 @@
 
 <ion-content padding>
 
-    <ion-row center>
-        <ion-col text-center>
-          <ion-button color="secondary" routerLink="/hacker" routerDirection="forward">
-            Hackers Hero
-          </ion-button>
-        </ion-col>
-      </ion-row>
+  <ion-row center>
+    <ion-col text-center>
+      <ion-button color="secondary" routerLink="/hacker" routerDirection="forward">
+        Hackers Hero
+      </ion-button>
+    </ion-col>
+  </ion-row>
 
   <ion-row center>
     <ion-col text-center>
@@ -23,5 +23,32 @@
       </ion-button>
     </ion-col>
   </ion-row>
+
+
+  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)"></ion-searchbar>
+
+  <ion-item>
+    <ion-label>Select Searchtype</ion-label>
+    <ion-select [(ngModel)]="type" (ionChange)="searchChanged($event)">
+      <ion-select-option value="Users">Loginname</ion-select-option>
+      <ion-select-option value="repositories">Repositories</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-list>
+    
+    <div *ngIf="type == 'Users'">
+      <ion-item *ngFor="let user of results">
+        <ion-avatar slot="start">
+          <img [src]="user.avatar_url" />
+        </ion-avatar>
+        <ion-label text-wrap>
+          <h3>{{ user.login }}</h3>
+        </ion-label>
+        <ion-icon name="arrow-forward" size="large" (click)="goToUserDetails(user)"></ion-icon>
+      </ion-item>
+    </div>
+
+  </ion-list>
 
 </ion-content>

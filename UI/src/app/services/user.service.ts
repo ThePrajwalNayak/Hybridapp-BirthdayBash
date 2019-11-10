@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { mergeMap } from 'rxjs/operators';
 
+export enum SearchType {
+  LoginName = 'Users',
+  Repositories = 'repositories'
+}
 
 export enum FollowersFollowingModalType {
   FOLLOWERS = 'Followers',
@@ -45,6 +49,16 @@ export class UserService {
 
   getRepoDetails(username) {
     return this.httpClient.get('https://api.github.com/users/' + username + '/repos');
+  }
+
+  searchData(searchData, SearchType){
+    if(SearchType == 'Users'){
+      return this.httpClient.get('https://api.github.com/users/'+searchData);
+    } else if(SearchType == 'repositories'){
+      return this.httpClient.get('https://api.github.com/search/repositories?q='+searchData);
+    }
+  
+    
   }
 
 }

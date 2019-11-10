@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router'; 
 
-import { UserService } from '../services/user.service';
+import { UserService , SearchType} from '../services/user.service';
+
+
 
 @Component({
   selector: 'app-home',
@@ -10,11 +13,30 @@ import { UserService } from '../services/user.service';
 export class HomePage implements OnInit {
 
 
-  constructor() { }
+  searchTerm : any = '';
+  type: SearchType = SearchType.LoginName;
+  results : any = [];
+
+  constructor(private userService : UserService, private router : Router) { }
 
   ngOnInit() {
 
   }
 
+  searchChanged() {
+    // Call our service function which returns an Observable
+    this.userService.searchData(this.searchTerm, this.type)
+    .subscribe(data => {
+      this.results.push(data);
+      debugger
+    }, error => {
+      console.log(error);
+    })
+  }
+
+  goToUserDetails(user) {
+    this.userService.setSelectedUser(user);
+    this.router.navigate(['/userDetails']);
+  }
 
 }
