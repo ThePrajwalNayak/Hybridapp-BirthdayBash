@@ -8,6 +8,11 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"./pages/hacker/hacker.module": [
+		"./src/app/pages/hacker/hacker.module.ts",
+		"common",
+		"pages-hacker-hacker-module"
+	],
 	"./pages/user-details/user-details.module": [
 		"./src/app/pages/user-details/user-details.module.ts",
 		"common",
@@ -480,7 +485,7 @@ module.exports = "<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-ap
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title class=\"titleCase\" text-center>{{user.login}} {{modalType | titlecase}}</ion-title>\n    <ion-icon slot=\"end\" name=\"close\" size=\"large\" (click)=\"closeModal()\"></ion-icon>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item *ngFor=\"let u of users\">\n      <ion-avatar slot=\"start\">\n        <img [src]=\"u.avatar_url\" />\n      </ion-avatar>\n      <ion-label text-center>\n        <h3>{{ u.login }}</h3>\n      </ion-label>\n    </ion-item>\n  </ion-list>\n  <ion-row center *ngIf=\"users.length > 100\">\n    <ion-col text-center>\n      <ion-button (click)=\"backToTop()\">\n        <ion-icon name=\"arrow-dropup-circle\"></ion-icon>\n      </ion-button>\n    </ion-col>\n  </ion-row>\n</ion-content>"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title class=\"titleCase\" text-center>{{user.login}} {{modalType | titlecase}}</ion-title>\n    <ion-icon class=\"ion-margin-end\" slot=\"end\" name=\"close\"  (click)=\"closeModal()\"></ion-icon>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item *ngFor=\"let u of users\">\n      <ion-avatar slot=\"start\">\n        <img [src]=\"u.avatar_url\" />\n      </ion-avatar>\n      <ion-label text-center>\n        <h3>{{ u.login }}</h3>\n      </ion-label>\n    </ion-item>\n  </ion-list>\n  <ion-row center *ngIf=\"users.length > 100\">\n    <ion-col text-center>\n      <ion-button (click)=\"backToTop()\">\n        <ion-icon name=\"arrow-dropup-circle\"></ion-icon>\n      </ion-button>\n    </ion-col>\n  </ion-row>\n</ion-content>"
 
 /***/ }),
 
@@ -504,7 +509,8 @@ var routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', loadChildren: function () { return Promise.all(/*! import() | home-home-module */[__webpack_require__.e("common"), __webpack_require__.e("home-home-module")]).then(__webpack_require__.bind(null, /*! ./home/home.module */ "./src/app/home/home.module.ts")).then(function (m) { return m.HomePageModule; }); } },
     { path: 'user', loadChildren: './pages/user/user.module#UserPageModule' },
-    { path: 'userDetails', loadChildren: './pages/user-details/user-details.module#UserDetailsPageModule' }
+    { path: 'userDetails', loadChildren: './pages/user-details/user-details.module#UserDetailsPageModule' },
+    { path: 'hacker', loadChildren: './pages/hacker/hacker.module#HackerPageModule' }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {

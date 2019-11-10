@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-title class=\"ion-text-left\">\n      Hackers Hero\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <ion-card>\n    <ion-card-header>\n      <ion-card-title *ngIf=\"hackersHero\">\n        #{{ hackersHero.login }}\n      </ion-card-title>\n      <ion-card-subtitle>\n        Full Statck Developer, Benaglore\n      </ion-card-subtitle>\n    </ion-card-header>\n\n    <ion-card-content text-center>\n      <img *ngIf=\"hackersHero\" [src]=\"hackersHero.avatar_url\" class=\"info-img\">\n\n      <ion-item lines=\"none\" class=\"ion-margin-top\">\n        <ion-chip>\n          <ion-label class=\"ion-margin-end\">Followers</ion-label>\n          <ion-badge color=\"primary\">{{followersArray.length}}</ion-badge>\n        </ion-chip>\n        <ion-button slot=\"end\" (click)=\"openModal(FOLLOWERS)\" [disabled]=\"followersArray.length == 0\">\n          <ion-icon name=\"arrow-forward\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n      <ion-item lines=\"none\" class=\"ion-margin-bottom\">\n        <ion-chip>\n          <ion-label class=\"ion-margin-end\">\n            Following\n          </ion-label>\n          <ion-badge color=\"primary\">{{followingArray.length}}</ion-badge>\n        </ion-chip>\n        <ion-button slot=\"end\" (click)=\"openModal(FOLLOWING)\" [disabled]=\"followingArray.length == 0\">\n          <ion-icon name=\"arrow-forward\"></ion-icon>\n        </ion-button>\n      </ion-item >\n\n      <ion-item lines=\"none\" class=\"ion-margin-top ion-margin-bottom\">\n          <ion-chip>\n            <ion-label class=\"ion-margin-end\">Projects</ion-label>\n            <ion-badge color=\"primary\">{{repos.length}}</ion-badge>\n          </ion-chip>\n          <!-- <ion-button slot=\"end\" (click)=\"openModal(FOLLOWERS)\" [disabled]=\"followersArray.length == 0\">\n            <ion-icon name=\"arrow-down\"></ion-icon>\n          </ion-button> -->\n        </ion-item>\n\n        <ion-list>\n            <ion-item *ngFor=\"let repo of repos\">\n              <ion-label>\n                  <ion-text class=\"repo-name\">\n                      <h2>{{repo.name}}</h2>\n                    </ion-text>\n                    <p>{{repo.created_at | date : 'mediumDate' }}</p>\n                    <ion-text>\n                      <p>{{repo.language}}</p>\n                    </ion-text>\n              </ion-label>\n            </ion-item>\n          </ion-list>\n          \n      <ion-row center>\n        <ion-col text-center>\n          <ion-button routerLink=\"/user\" routerDirection=\"forward\">\n            More Hackers\n          </ion-button>\n        </ion-col>\n      </ion-row>\n\n    </ion-card-content>\n  </ion-card>\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\n    <ion-fab-button color=\"secondary\">Follow</ion-fab-button>\n    <ion-fab-list side=\"top\">\n      <ion-fab-button target=\"_blank\" href=\"https://www.linkedin.com/in/theprajwalnayak/\">\n        <ion-icon name=\"logo-linkedin\"></ion-icon>\n      </ion-fab-button>\n      <ion-fab-button target=\"_blank\" href=\"https://twitter.com/theprajwalnayak\">\n        <ion-icon name=\"logo-twitter\"></ion-icon>\n      </ion-fab-button>\n      <ion-fab-button target=\"_blank\" href=\"https://www.facebook.com/theprajwalnayak\">\n        <ion-icon name=\"logo-facebook\"></ion-icon>\n      </ion-fab-button>\n      <ion-fab-button target=\"_blank\" href=\"https://github.com/theprajwalnayak\">\n        <ion-icon name=\"logo-github\"></ion-icon>\n      </ion-fab-button>\n    </ion-fab-list>\n  </ion-fab>\n</ion-content>\n"
+module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-title text-center>\n      Hackers Hero\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding class=\"home-content\">\n\n  <video loop muted autoplay poster=\"/assets/videos/Codes - 23355.mp4\" class=\"fullscreen-bg__video\">\n      <!-- <source src=\"/assets/images/Beach-Camera/WEBM/Beach-Camera..webm\" type=\"video/webm\"> -->\n      <source src=\"/assets/videos/Codes - 23355.mp4\" type=\"video/mp4\">\n      <!-- <source src=\"/assets/images/Beach-Camera/OGV/Beach-Camera.ogv\" type=\"video/ogv\"> -->\n  </video>\n\n  <ion-row center>\n    <ion-col text-center>\n      <ion-button color=\"secondary\" routerLink=\"/hacker\" routerDirection=\"forward\">\n        Hackers Hero\n      </ion-button>\n    </ion-col>\n  </ion-row>\n\n  <ion-row center>\n    <ion-col text-center>\n      <ion-button color=\"secondary\" routerLink=\"/user\" routerDirection=\"forward\">\n        More Hackers\n      </ion-button>\n    </ion-col>\n  </ion-row>\n\n\n  <ion-searchbar [(ngModel)]=\"searchTerm\" [placeholder]=\"searchPlaceholder\" (ionChange)=\"searchChanged($event)\" (ionCancel)=\"resetSearchTerm($event)\"></ion-searchbar>\n\n  <ion-item>\n    <ion-label>Select Searchtype</ion-label>\n    <ion-select [(ngModel)]=\"type\" (ionChange)=\"filterChanged($event)\">\n      <ion-select-option value=\"Users\">Loginname</ion-select-option>\n      <ion-select-option value=\"repositories\">Repositories</ion-select-option>\n    </ion-select>\n  </ion-item>\n\n  <ion-list>\n\n    <div *ngIf=\"type == 'Users'\">\n      <ion-item *ngFor=\"let user of results\">\n        <ion-avatar slot=\"start\">\n          <img [src]=\"user.avatar_url\" />\n        </ion-avatar>\n        <ion-label text-wrap>\n          <h3>{{ user.login }}</h3>\n        </ion-label>\n        <ion-icon name=\"arrow-forward\" size=\"large\" (click)=\"goToUserDetails(user)\"></ion-icon>\n      </ion-item>\n    </div>\n\n    <div *ngIf=\"type == 'repositories'\">\n      <ion-item *ngFor=\"let repo of results\">\n        <ion-avatar slot=\"start\" class=\"repo-avatar\">\n          <div>\n            <p>{{avatarLetter(repo.name)}}</p>\n          </div>\n        </ion-avatar>\n        <ion-label>\n          <ion-text class=\"repo-name\">\n            <h3>{{repo.name}}</h3>\n          </ion-text>\n          <p>{{repo.created_at | date : 'mediumDate' }}</p>\n          <ion-text>\n            <p>{{repo.language}}</p>\n          </ion-text>\n        </ion-label>\n      </ion-item>\n    </div>\n\n  </ion-list>\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -68,7 +68,7 @@ var HomePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".repo-avatar {\n  height: 50px;\n  width: 50px;\n  border-radius: 50px;\n  background: orange;\n  color: white;\n  font-weight: bolder;\n}\n\n.repo-name {\n  font-family: \"OpenSans-Bold\";\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9wcmFqd2FsbmF5YWsvZ2l0aHViL0h5YnJpZGFwcC1CaXJ0aGRheUJhc2gvVUkvc3JjL2FwcC9ob21lL2hvbWUucGFnZS5zY3NzIiwic3JjL2FwcC9ob21lL2hvbWUucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksWUFBQTtFQUNBLFdBQUE7RUFDQSxtQkFBQTtFQUNBLGtCQUFBO0VBQ0EsWUFBQTtFQUNBLG1CQUFBO0FDQ0o7O0FERUE7RUFDSSw0QkFBQTtBQ0NKIiwiZmlsZSI6InNyYy9hcHAvaG9tZS9ob21lLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5yZXBvLWF2YXRhcntcbiAgICBoZWlnaHQ6IDUwcHg7XG4gICAgd2lkdGg6IDUwcHg7XG4gICAgYm9yZGVyLXJhZGl1czogNTBweDtcbiAgICBiYWNrZ3JvdW5kOiBvcmFuZ2U7XG4gICAgY29sb3I6IHdoaXRlO1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkZXI7XG59XG5cbi5yZXBvLW5hbWUge1xuICAgIGZvbnQtZmFtaWx5OiAnT3BlblNhbnMtQm9sZCc7XG59IiwiLnJlcG8tYXZhdGFyIHtcbiAgaGVpZ2h0OiA1MHB4O1xuICB3aWR0aDogNTBweDtcbiAgYm9yZGVyLXJhZGl1czogNTBweDtcbiAgYmFja2dyb3VuZDogb3JhbmdlO1xuICBjb2xvcjogd2hpdGU7XG4gIGZvbnQtd2VpZ2h0OiBib2xkZXI7XG59XG5cbi5yZXBvLW5hbWUge1xuICBmb250LWZhbWlseTogXCJPcGVuU2Fucy1Cb2xkXCI7XG59Il19 */"
+module.exports = ".home-content .repo-avatar {\n  margin-right: 32px;\n}\n.home-content .repo-avatar div {\n  height: 50px;\n  width: 50px;\n  border-radius: 50px;\n  background: var(--ion-color-primary);\n  color: white;\n  font-weight: bolder;\n  position: relative;\n}\n.home-content .repo-avatar div p {\n  font-weight: bold;\n  font-size: 22px;\n  position: absolute;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n}\n.home-content .repo-name {\n  font-family: \"OpenSans-Bold\";\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9wcmFqd2FsbmF5YWsvZ2l0aHViL0h5YnJpZGFwcC1CaXJ0aGRheUJhc2gvVUkvc3JjL2FwcC9ob21lL2hvbWUucGFnZS5zY3NzIiwic3JjL2FwcC9ob21lL2hvbWUucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVJO0VBQ0ksa0JBQUE7QUNEUjtBREdRO0VBQ0ksWUFBQTtFQUNBLFdBQUE7RUFDQSxtQkFBQTtFQUNBLG9DQUFBO0VBQ0EsWUFBQTtFQUNBLG1CQUFBO0VBQ0Esa0JBQUE7QUNEWjtBREdZO0VBQ0ksaUJBQUE7RUFDQSxlQUFBO0VBQ0Esa0JBQUE7RUFFQSxTQUFBO0VBQ0Esd0NBQUE7VUFBQSxnQ0FBQTtBQ0ZoQjtBRE9JO0VBQ0ksNEJBQUE7QUNMUiIsImZpbGUiOiJzcmMvYXBwL2hvbWUvaG9tZS5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuaG9tZS1jb250ZW50IHtcblxuICAgIC5yZXBvLWF2YXRhciB7XG4gICAgICAgIG1hcmdpbi1yaWdodDogMzJweDtcblxuICAgICAgICBkaXYge1xuICAgICAgICAgICAgaGVpZ2h0OiA1MHB4O1xuICAgICAgICAgICAgd2lkdGg6IDUwcHg7XG4gICAgICAgICAgICBib3JkZXItcmFkaXVzOiA1MHB4O1xuICAgICAgICAgICAgYmFja2dyb3VuZDogdmFyKC0taW9uLWNvbG9yLXByaW1hcnkpO1xuICAgICAgICAgICAgY29sb3I6IHdoaXRlO1xuICAgICAgICAgICAgZm9udC13ZWlnaHQ6IGJvbGRlcjtcbiAgICAgICAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcblxuICAgICAgICAgICAgcCB7XG4gICAgICAgICAgICAgICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgICAgICAgICAgICAgZm9udC1zaXplOiAyMnB4O1xuICAgICAgICAgICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgICAgICAgICAgICAvLyB0b3A6IDUwJTtcbiAgICAgICAgICAgICAgICBsZWZ0OiA1MCU7XG4gICAgICAgICAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICB9XG5cbiAgICAucmVwby1uYW1lIHtcbiAgICAgICAgZm9udC1mYW1pbHk6ICdPcGVuU2Fucy1Cb2xkJztcblxuICAgICAgICBoMiB7XG4gICAgICAgICAgICAvLyBtYXJnaW4tYm90dG9tOiA4cHg7XG4gICAgICAgIH1cbiAgICB9XG5cbn0iLCIuaG9tZS1jb250ZW50IC5yZXBvLWF2YXRhciB7XG4gIG1hcmdpbi1yaWdodDogMzJweDtcbn1cbi5ob21lLWNvbnRlbnQgLnJlcG8tYXZhdGFyIGRpdiB7XG4gIGhlaWdodDogNTBweDtcbiAgd2lkdGg6IDUwcHg7XG4gIGJvcmRlci1yYWRpdXM6IDUwcHg7XG4gIGJhY2tncm91bmQ6IHZhcigtLWlvbi1jb2xvci1wcmltYXJ5KTtcbiAgY29sb3I6IHdoaXRlO1xuICBmb250LXdlaWdodDogYm9sZGVyO1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG59XG4uaG9tZS1jb250ZW50IC5yZXBvLWF2YXRhciBkaXYgcCB7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBmb250LXNpemU6IDIycHg7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgbGVmdDogNTAlO1xuICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKTtcbn1cbi5ob21lLWNvbnRlbnQgLnJlcG8tbmFtZSB7XG4gIGZvbnQtZmFtaWx5OiBcIk9wZW5TYW5zLUJvbGRcIjtcbn0iXX0= */"
 
 /***/ }),
 
@@ -84,112 +84,81 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomePage", function() { return HomePage; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/user.service */ "./src/app/services/user.service.ts");
-/* harmony import */ var _followers_following_modal_followers_following_modal_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../followers-following-modal/followers-following-modal.page */ "./src/app/followers-following-modal/followers-following-modal.page.ts");
-
 
 
 
 
 var HomePage = /** @class */ (function () {
-    function HomePage(userService, modalController) {
+    function HomePage(userService, router) {
         this.userService = userService;
-        this.modalController = modalController;
-        this.username = 'ThePrajwalNayak';
-        this.FOLLOWERS = 'FOLLOWERS';
-        this.FOLLOWING = 'FOLLOWING';
-        this.followersArray = [];
-        this.followingArray = [];
-        this.repos = [];
+        this.router = router;
+        this.searchTerm = '';
+        this.type = _services_user_service__WEBPACK_IMPORTED_MODULE_3__["SearchType"].LoginName;
+        this.results = [];
+        this.currentSeachFilter = this.type;
+        this.searchPlaceholder = "login name 'ThePrajwalNayak'";
     }
     HomePage.prototype.ngOnInit = function () {
-        this.getHackersHero();
-        this.getFollowers();
-        this.getFollowing();
-        this.getRepository();
     };
-    HomePage.prototype.getHackersHero = function () {
+    //Call API to get result based on SeachTerm and Search Type
+    HomePage.prototype.searchChanged = function (event) {
         var _this = this;
-        this.userService.getUserByUserName(this.username)
-            .subscribe(function (data) {
-            _this.hackersHero = data;
-        }, function (error) {
-            console.log(error);
-        });
+        console.log(event.detail.value);
+        //If user using same filter for search then proceed with API call
+        if (this.currentSeachFilter == this.type) {
+            //Call API if searchTerm not empty 
+            if (this.searchTerm) {
+                this.userService.searchData(this.searchTerm, this.type)
+                    .subscribe(function (data) {
+                    _this.prepareResult(data);
+                }, function (error) {
+                    _this.results = [];
+                    console.log(error);
+                });
+            }
+            else {
+                this.results = [];
+            }
+        }
     };
-    HomePage.prototype.getFollowers = function () {
-        var _this = this;
-        this.userService.getFollowers(this.username)
-            .subscribe(function (data) {
-            _this.followersArray = data;
-        }, function (error) {
-            console.log(error);
-        });
+    HomePage.prototype.prepareResult = function (data) {
+        this.results = [];
+        if (this.type == 'Users') {
+            this.results.push(data);
+        }
+        else if (this.type == 'repositories') {
+            var objCopy = JSON.parse(JSON.stringify(data.items));
+            this.results = objCopy;
+        }
     };
-    HomePage.prototype.getFollowing = function () {
-        var _this = this;
-        this.userService.getFollowing(this.username)
-            .subscribe(function (data) {
-            _this.followingArray = data;
-        }, function (error) {
-            console.log(error);
-        });
+    HomePage.prototype.resetSearchTerm = function (event) {
+        this.searchTerm = '';
+        this.results = [];
     };
-    HomePage.prototype.getRepository = function () {
-        var _this = this;
-        this.userService.getRepoDetails(this.username)
-            .subscribe(function (data) {
-            _this.repos = data;
-        }, function (error) {
-            console.log(error);
-        });
+    HomePage.prototype.filterChanged = function (event) {
+        console.log(event.detail.value);
+        this.currentSeachFilter = event.detail.value;
+        this.searchTerm = '';
+        this.results = [];
+        if (event.detail.value == 'Users') {
+            this.searchPlaceholder = "login name 'ThePrajwalNayak'";
+        }
+        else if (event.detail.value == 'repositories') {
+            this.searchPlaceholder = "repo name 'nayak news'";
+        }
     };
-    HomePage.prototype.openModal = function (modalType) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var input, modal;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        input = {
-                            'user': null,
-                            'users': null,
-                            'modalType': null
-                        };
-                        if (modalType === this.FOLLOWERS) {
-                            input.user = this.hackersHero,
-                                input.users = this.followersArray;
-                            input.modalType = this.FOLLOWERS;
-                        }
-                        else {
-                            input.user = this.hackersHero,
-                                input.users = this.followingArray;
-                            input.modalType = this.FOLLOWING;
-                        }
-                        return [4 /*yield*/, this.modalController.create({
-                                component: _followers_following_modal_followers_following_modal_page__WEBPACK_IMPORTED_MODULE_4__["FollowersFollowingModalPage"],
-                                componentProps: input
-                            })];
-                    case 1:
-                        modal = _a.sent();
-                        modal.onDidDismiss().then(function (dataReturned) {
-                            if (dataReturned !== null) {
-                                var dataReturnedModal = dataReturned.data;
-                                //alert('Modal Sent Data :'+ dataReturned);
-                            }
-                        });
-                        return [4 /*yield*/, modal.present()];
-                    case 2: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
+    HomePage.prototype.goToUserDetails = function (user) {
+        this.userService.setSelectedUser(user);
+        this.router.navigate(['/userDetails']);
     };
     HomePage.prototype.avatarLetter = function (word) {
-        return word.charAt(0);
+        return word.charAt(0).toUpperCase();
     };
     HomePage.ctorParameters = function () { return [
         { type: _services_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] }
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
     ]; };
     HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -197,7 +166,7 @@ var HomePage = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./home.page.html */ "./node_modules/raw-loader/index.js!./src/app/home/home.page.html"),
             styles: [__webpack_require__(/*! ./home.page.scss */ "./src/app/home/home.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], HomePage);
     return HomePage;
 }());

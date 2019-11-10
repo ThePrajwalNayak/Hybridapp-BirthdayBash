@@ -780,11 +780,12 @@ const findCheckedOption = (el, tagName) => {
 /*!******************************************!*\
   !*** ./src/app/services/user.service.ts ***!
   \******************************************/
-/*! exports provided: FollowersFollowingModalType, UserService */
+/*! exports provided: SearchType, FollowersFollowingModalType, UserService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SearchType", function() { return SearchType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FollowersFollowingModalType", function() { return FollowersFollowingModalType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserService", function() { return UserService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
@@ -793,6 +794,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var SearchType;
+(function (SearchType) {
+    SearchType["LoginName"] = "Users";
+    SearchType["Repositories"] = "repositories";
+})(SearchType || (SearchType = {}));
 var FollowersFollowingModalType;
 (function (FollowersFollowingModalType) {
     FollowersFollowingModalType["FOLLOWERS"] = "Followers";
@@ -825,6 +831,14 @@ let UserService = class UserService {
     }
     getRepoDetails(username) {
         return this.httpClient.get('https://api.github.com/users/' + username + '/repos');
+    }
+    searchData(searchData, SearchType) {
+        if (SearchType == 'Users') {
+            return this.httpClient.get('https://api.github.com/users/' + searchData);
+        }
+        else if (SearchType == 'repositories') {
+            return this.httpClient.get('https://api.github.com/search/repositories?q=' + searchData);
+        }
     }
 };
 UserService.ctorParameters = () => [

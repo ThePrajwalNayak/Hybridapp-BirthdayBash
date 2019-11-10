@@ -7,6 +7,14 @@
 </ion-header>
 
 <ion-content padding class="home-content">
+  <ion-card>
+    <video loop muted autoplay poster="/assets/videos/Codes - 23355.mp4" class="home-bg-video">
+      <!-- <source src="/assets/images/Beach-Camera/WEBM/Beach-Camera..webm" type="video/webm"> -->
+      <source src="/assets/videos/Codes - 23355.mp4" type="video/mp4">
+      <!-- <source src="/assets/images/Beach-Camera/OGV/Beach-Camera.ogv" type="video/ogv"> -->
+    </video>
+  </ion-card>
+
 
   <ion-row center>
     <ion-col text-center>
@@ -24,50 +32,71 @@
     </ion-col>
   </ion-row>
 
-
-  <ion-searchbar [(ngModel)]="searchTerm" [placeholder]="searchPlaceholder" (ionChange)="searchChanged($event)" (ionCancel)="resetSearchTerm($event)"></ion-searchbar>
-
-  <ion-item>
-    <ion-label>Select Searchtype</ion-label>
-    <ion-select [(ngModel)]="type" (ionChange)="filterChanged($event)">
-      <ion-select-option value="Users">Loginname</ion-select-option>
-      <ion-select-option value="repositories">Repositories</ion-select-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-list>
-
-    <div *ngIf="type == 'Users'">
-      <ion-item *ngFor="let user of results">
-        <ion-avatar slot="start">
-          <img [src]="user.avatar_url" />
-        </ion-avatar>
-        <ion-label text-wrap>
-          <h3>{{ user.login }}</h3>
-        </ion-label>
-        <ion-icon name="arrow-forward" size="large" (click)="goToUserDetails(user)"></ion-icon>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Search GitHub</ion-card-title>
+      <ion-card-subtitle>Find users via github login name [ Name must match the login name exactly ], find repositories via github repo name [ Can be nearest match ] </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-searchbar [(ngModel)]="searchTerm" [placeholder]="searchPlaceholder" (ionChange)="searchChanged($event)"
+        (ionCancel)="resetSearchTerm($event)"></ion-searchbar>
+      <ion-item>
+        <ion-label>Searchtype</ion-label>
+        <ion-select [(ngModel)]="type" (ionChange)="filterChanged($event)">
+          <ion-select-option value="Users">Name</ion-select-option>
+          <ion-select-option value="repositories">Repo</ion-select-option>
+        </ion-select>
       </ion-item>
-    </div>
 
-    <div *ngIf="type == 'repositories'">
-      <ion-item *ngFor="let repo of results">
-        <ion-avatar slot="start" class="repo-avatar">
-          <div>
-            <p>{{avatarLetter(repo.name)}}</p>
-          </div>
-        </ion-avatar>
-        <ion-label>
-          <ion-text class="repo-name">
-            <h3>{{repo.name}}</h3>
-          </ion-text>
-          <p>{{repo.created_at | date : 'mediumDate' }}</p>
-          <ion-text>
-            <p>{{repo.language}}</p>
-          </ion-text>
-        </ion-label>
-      </ion-item>
-    </div>
+      <ion-list>
+        <div *ngIf="type == 'Users'">
+          <ion-item *ngFor="let user of results">
+            <ion-avatar slot="start">
+              <img [src]="user.avatar_url" />
+            </ion-avatar>
+            <ion-label text-wrap>
+              <h3>{{ user.login }}</h3>
+            </ion-label>
+            <ion-icon name="arrow-forward" size="large" (click)="goToUserDetails(user)"></ion-icon>
+          </ion-item>
+        </div>
+        <div *ngIf="type == 'repositories'">
+          <ion-item *ngFor="let repo of results">
+            <ion-avatar slot="start" class="repo-avatar">
+              <div>
+                <p>{{avatarLetter(repo.name)}}</p>
+              </div>
+            </ion-avatar>
+            <ion-label>
+              <ion-text class="repo-name">
+                <h3>{{repo.name}}</h3>
+              </ion-text>
+              <p>{{repo.created_at | date : 'mediumDate' }}</p>
+              <ion-text>
+                <p>{{repo.language}}</p>
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </div>
+      </ion-list>
+    </ion-card-content>
 
-  </ion-list>
+  </ion-card>
+
+  <ion-row center>
+    <ion-col text-center>
+      <ion-button color="secondary" routerLink="/hacker" routerDirection="forward">
+        Hackers Hero
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row center>
+    <ion-col text-center>
+      <ion-button color="secondary" routerLink="/user" routerDirection="forward">
+        More Hackers
+      </ion-button>
+    </ion-col>
+  </ion-row>
 
 </ion-content>
