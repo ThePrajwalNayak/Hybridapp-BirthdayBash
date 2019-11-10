@@ -25,7 +25,7 @@
   </ion-row>
 
 
-  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)" (ionCancel)="resetSearchTerm($event)"></ion-searchbar>
+  <ion-searchbar [(ngModel)]="searchTerm" [placeholder]="searchPlaceholder" (ionChange)="searchChanged($event)" (ionCancel)="resetSearchTerm($event)"></ion-searchbar>
 
   <ion-item>
     <ion-label>Select Searchtype</ion-label>

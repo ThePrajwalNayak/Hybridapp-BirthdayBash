@@ -16,6 +16,7 @@ export class HomePage implements OnInit {
   type: SearchType = SearchType.LoginName;
   results: any = [];
   currentSeachFilter = this.type;
+  searchPlaceholder = "login name 'ThePrajwalNayak'";
 
   constructor(private userService: UserService, private router: Router) { }
 
@@ -63,6 +64,11 @@ export class HomePage implements OnInit {
     this.currentSeachFilter = event.detail.value;
     this.searchTerm = '';
     this.results = [];
+    if(event.detail.value == 'Users'){
+      this.searchPlaceholder = "login name 'ThePrajwalNayak'";
+    }else if(event.detail.value == 'repositories'){
+      this.searchPlaceholder = "repo name 'nayak news'";
+    }
   }
 
   goToUserDetails(user) {
